@@ -23,7 +23,6 @@ public class IndexController extends AbstractController {
     @AdminOperation
     @RequestMapping({ "/test" })
     public ApiResponse test() {
-        System.out.println(222);
         return ApiResponse.successResponse().setData("test");
     }
 
