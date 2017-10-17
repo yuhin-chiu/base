@@ -16,6 +16,6 @@ public class HttpConstant {
     public static final String[] NOT_CHECK_URL = { "/", "/health", "/health/", "/index", "/index/" };
     // 不用登陆的url
     public static final String[] NOT_LOGIN_URL = { "/api/**", "/backend/login", "/backend/loginAction",
-            "/backend/logout", "/backend/addUser" };
+            "/backend/logout", "/backend/addUser", "/backend/modifyPwd"};
 
 }

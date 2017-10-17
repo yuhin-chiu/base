@@ -20,17 +20,32 @@ public class IndexController extends AbstractController {
         return ApiResponse.successResponse().setData("nihao");
     }
 
+    /**
+     * 一个需要验证登陆的接口
+     * 
+     * @return
+     */
     @AdminOperation
     @RequestMapping({ "/test" })
     public ApiResponse test() {
         return ApiResponse.successResponse().setData("test");
     }
 
+    /**
+     * 不需要验证登陆的接口
+     * 
+     * @return
+     */
     @RequestMapping({ "/test2" })
     public ApiResponse test2() {
         return ApiResponse.successResponse().setData("test2");
     }
 
+    /**
+     * 不存在的接口
+     * 
+     * @return
+     */
     @RequestMapping({ "/*" })
     public ApiResponse other() {
         return ApiResponse.noMapping();
