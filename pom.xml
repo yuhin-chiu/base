@@ -4,11 +4,11 @@
    <modelVersion>4.0.0</modelVersion>
 
    <groupId>com.example</groupId>
-   <artifactId>Yx</artifactId>
+   <artifactId>base</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Yx</name>
+   <name>base</name>
    <description>SpringBoot project for Base</description>
 
    <parent>
