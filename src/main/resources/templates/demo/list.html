@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>管理后台</title>
+<th:block th:include="/common/common :: header"></th:block>
+</head>
+<body page="others"> <!-- 控制一级菜单高亮-->
+   <th:block th:include="/common/common :: toolbar"></th:block>
+   <div id="body-content" menu="list"> <!-- 控制二级菜单高亮 -->
+      <th:block th:include="/common/common :: others"></th:block><!-- 控制二级菜单 列表-->>
+      <div class="main">
+      <!-- 上边的查询菜单栏  -->
+         <div th:replace="/common/modal :: modal-menu(addable=true)"></div>
+      </div>
+   </div>
+   <!-- 添加和编辑的弹框  -->
+    <div th:replace="/common/modal :: modal-dialog"></div>
+   <div th:include="/common/common :: footer"></div>
+   <script type="text/javascript" src="/js/demo/demo.js"></script>
+   <script type="text/javascript" src="/js/demo/list.js"></script>
+</body>
+</html>

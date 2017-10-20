@@ -46,7 +46,7 @@ $(function() {
     function init() {
         $this.bootstrapTable({
             url : baseTable.url,// 数据源
-            dataField : "data",// 服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+            dataField : "rows",// 服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
             undefinedText : '',
             pagination : true,// 是否分页
             pageSize : 10,// 单页记录数

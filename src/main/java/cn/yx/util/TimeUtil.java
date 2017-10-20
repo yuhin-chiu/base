@@ -159,6 +159,24 @@ public class TimeUtil {
         return new String[] { "1970-01-01 00:00:00", "2099-12-31 23:59:59" };
     }
 
+    /**
+     * 将行如2010-10-10 2012-12-12的字符串转为Date类型，其中endDay会加上一天
+     * @param dayRange
+     * @return 2010-10-10 2012-12-13
+     */
+    public static Date[] splitDayRangeToDateBig(String dayRange) {
+        try {
+            String beginTimeStr = dayRange.substring(0, 10);
+            String endTimeStr = dayRange.substring(dayRange.length() - 10);
+            Date beginDate = getDayFormat().parse(beginTimeStr);
+            // 最后时间加一天
+            Long endTime = getDayFormat().parse(endTimeStr).getTime() + 3600 * 24 * 1000;
+            return new Date[] { beginDate, new Date(endTime) };
+        } catch (Exception e) {
+        }
+        return new Date[] { new Date(0), new Date(32503564800000L) };
+    }
+
     public static String formatDayRange(Long start, Long end) {
         return getDayFormat().format(new Date(start * 1000)) + " - " + getDayFormat().format(new Date(end * 1000));
     }
@@ -176,6 +194,10 @@ public class TimeUtil {
     }
 
     public static void main(String args[]) {
+        Date[] dates = TimeUtil.splitDayRangeToDateBig("2010-10-2");
+        System.out.println(dates[0]);
+        System.out.println(dates[1]);
+        System.out.println(TimeUtil.parseDay("2999-12-31")); //32503564800
         Long current = TimeUtil.getCurrentSeconds();
         System.out.println(current);
         System.out.println(TimeUtil.formatDay(current));

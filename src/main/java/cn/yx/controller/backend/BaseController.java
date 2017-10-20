@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.yx.config.holder.AdminInfoHolder;
 import cn.yx.model.Admin;
+import cn.yx.model.ApiResponse;
 import cn.yx.service.AdminService;
 import cn.yx.util.MD5Util;
 
@@ -31,7 +32,7 @@ public class BaseController {
 
     @RequestMapping({ "/", "", "index" })
     public String index() {
-        return "/index/upload";
+        return "/demo/list";
     }
 
     @RequestMapping("/loginAction")
