@@ -25,14 +25,14 @@ import cn.yx.util.MD5Util;
 
 @Controller
 @RequestMapping("/backend")
-public class BaseController {
+public class BasePageController {
 
     @Resource
     private AdminService adminService;
 
     @RequestMapping({ "/", "", "index" })
     public String index() {
-        return "/demo/list";
+        return "redirect:/backend/demo/list";
     }
 
     @RequestMapping("/loginAction")

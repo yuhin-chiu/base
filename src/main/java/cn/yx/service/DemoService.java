@@ -40,4 +40,20 @@ public class DemoService {
         PageHelper.startPage(page, pageSize);
         return demoMapper.selectByExample(example);
     }
+
+    public Demo getById(Long id) {
+        return demoMapper.selectByPrimaryKey(id);
+    }
+
+    public Boolean insertOrUpdate(Long id, String title, String content) {
+        Demo record = new Demo();
+        record.setId(id);
+        record.setContent(content);
+        record.setTitle(title);
+        if (id == null) {
+            return demoMapper.insertSelective(record) > 0 ? true : false;
+        } else {
+            return demoMapper.updateByPrimaryKeySelective(record) > 0 ? true : false;
+        }
+    }
 }

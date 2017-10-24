@@ -3,6 +3,7 @@ package cn.yx.controller.api;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,22 @@ public class DemoController extends AbstractController {
         List<Demo> list = demoService.list(title, timeRange, page, pageSize);
         Long total = ((Page<Demo>) list).getTotal();
         return ResponseList.rows(list).total(total);
+    }
+
+    @RequestMapping("/getById")
+    @ResponseBody
+    public Demo getById(@RequestParam(value = "id", required = true) Long id) {
+        return demoService.getById(id);
+    }
+
+    @RequestMapping(value = "/insertOrUpdate", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResponse insertOrUpdate(@RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "title", required = true) String title,
+            @RequestParam(value = "content", required = true) String content) {
+        if (demoService.insertOrUpdate(id, title, content)) {
+            return ApiResponse.successResponse();
+        }
+        return ApiResponse.exceptionResponse();
     }
 }

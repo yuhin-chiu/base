@@ -3,21 +3,87 @@ $(function() {
 
     var condition = {};
     var $this = {};
+    var baseUri = "demo";
 
-    var baseTable = function(url, columns, getOtherCondition, callback, options) {
+    var baseTable = function(uri, columns, getOtherCondition, callback, options) {
         $this = $(this);
 
+        baseUri = uri;
         baseTable.columns = columns ? columns : baseTable.columns;
         baseTable.options = options ? options : baseTable.options;
-        baseTable.url = url ? url : baseTable.url;
+        baseTable.url = "/api/" + baseUri + "/list";
         baseTable.getOtherCondition = getOtherCondition ? getOtherCondition
                 : baseTable.getOtherCondition;
         baseTable.callback = callback?callback:baseTable.callback;
 
         init();
     }
-    baseTable.callback = function() {
-        //Do nothing
+    baseTable.callback = function(data) {
+        $(".remove").each(function(i) {
+            $($(".remove")[i]).click(function() {
+                var rowid = $($(".remove")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: -1}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("删除成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else {
+                                        console.log("出现异常，请重试！");
+                                    }
+                                });
+                            }
+                        });
+
+            });
+            $($(".yes")[i]).click(function() {
+                var rowid = $($(".yes")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: 1}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("设置首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else {
+                                        console.log("出现异常，请重试！");
+                                    }
+                                });
+                            }
+                        });
+
+            });
+            $($(".no")[i]).click(function() {
+                var rowid = $($(".no")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: 0}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("删除首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else {
+                                        console.log("出现异常，请重试！");
+                                    }
+                                });
+                            }
+                        });
+
+            });
+        });
     };
     baseTable.getOtherCondition = function() {
         return {};
