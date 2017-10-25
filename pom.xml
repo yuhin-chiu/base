@@ -4,12 +4,12 @@
    <modelVersion>4.0.0</modelVersion>
 
    <groupId>com.example</groupId>
-   <artifactId>JinChi</artifactId>
+   <artifactId>base</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>JinChi</name>
-   <description>SpringBoot project for JinChi</description>
+   <name>base</name>
+   <description>SpringBoot project for Base</description>
 
    <parent>
       <groupId>org.springframework.boot</groupId>
@@ -38,6 +38,13 @@
          <artifactId>mybatis-spring-boot-starter</artifactId>
          <version>1.3.0</version>
       </dependency>
+            <!-- 分页插件 -->
+      <dependency>
+         <groupId>com.github.pagehelper</groupId>
+         <artifactId>pagehelper</artifactId>
+         <version>5.0.4</version>
+      </dependency>
+      
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -107,7 +114,7 @@
       <dependency>
          <groupId>org.apache.commons</groupId>
          <artifactId>commons-lang3</artifactId>
-         <version>3.1</version>
+         <version>3.5</version>
          <scope>compile</scope>
       </dependency>
       <dependency>

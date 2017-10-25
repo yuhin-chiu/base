@@ -3,11 +3,15 @@ package cn.yx.model;
 import cn.yx.enums.ApiResponseEnum;
 
 public class ApiResponse {
-    private Integer code = 200;
-    private String msg = "success";
+    private Integer code;
+    private String msg;
     private Object data;
     private String description;
+
     private Integer total;
+    private Integer currentPage;
+    private Integer pageSize;
+    private boolean hasMore;
 
     public void setEnum(ApiResponseEnum en) {
         this.code = en.getCode();
@@ -132,5 +136,29 @@ public class ApiResponse {
         response.setCode(ApiResponseEnum.COMMON_ERROR.getCode());
         response.setMsg(ApiResponseEnum.COMMON_ERROR.getContent());
         return response;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public boolean isHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(boolean hasMore) {
+        this.hasMore = hasMore;
     }
 }

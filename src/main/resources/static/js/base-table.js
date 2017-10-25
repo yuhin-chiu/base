@@ -3,21 +3,93 @@ $(function() {
 
     var condition = {};
     var $this = {};
+    var baseUri = "demo";
 
-    var baseTable = function(url, columns, getOtherCondition, callback, options) {
+    var baseTable = function(uri, columns, getOtherCondition, callback, options) {
         $this = $(this);
 
+        baseUri = uri;
         baseTable.columns = columns ? columns : baseTable.columns;
         baseTable.options = options ? options : baseTable.options;
-        baseTable.url = url ? url : baseTable.url;
+        baseTable.url = "/api/" + baseUri + "/list";
         baseTable.getOtherCondition = getOtherCondition ? getOtherCondition
                 : baseTable.getOtherCondition;
         baseTable.callback = callback?callback:baseTable.callback;
 
         init();
     }
-    baseTable.callback = function() {
-        //Do nothing
+    baseTable.callback = function(data) {
+        $(".remove").each(function(i) {
+            $($(".remove")[i]).click(function() {
+                var rowid = $($(".remove")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: -1}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("删除成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
+                                    }
+                                });
+                            }
+                        });
+
+            });
+            $($(".yes")[i]).click(function() {
+                var rowid = $($(".yes")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: 1}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("设置首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
+                                    }
+                                });
+                            }
+                        });
+
+            });
+            $($(".no")[i]).click(function() {
+                var rowid = $($(".no")[i]).attr("rowid");
+                window.wxc.xcConfirm("请确认您的操作！",
+                        window.wxc.xcConfirm.typeEnum.confirm, {
+                            onOk : function() {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: 0}, function(data) {
+                                    if(data.code == 200) {
+                                        window.wxc.xcConfirm("删除首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
+                                            onOk: function(v) {
+                                                $this.baseTable.query();
+                                                //window.location.href = "/backend/" + baseUri + "/list";
+                                            }
+                                        });
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
+                                    }
+                                });
+                            }
+                        });
+
+            });
+        });
     };
     baseTable.getOtherCondition = function() {
         return {};
@@ -46,7 +118,7 @@ $(function() {
     function init() {
         $this.bootstrapTable({
             url : baseTable.url,// 数据源
-            dataField : "data",// 服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+            dataField : "rows",// 服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
             undefinedText : '',
             pagination : true,// 是否分页
             pageSize : 10,// 单页记录数

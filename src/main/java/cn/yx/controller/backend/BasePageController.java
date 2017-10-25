@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.yx.config.holder.AdminInfoHolder;
 import cn.yx.model.Admin;
+import cn.yx.model.ApiResponse;
 import cn.yx.service.AdminService;
 import cn.yx.util.MD5Util;
 
@@ -24,14 +25,14 @@ import cn.yx.util.MD5Util;
 
 @Controller
 @RequestMapping("/backend")
-public class BaseController {
+public class BasePageController {
 
     @Resource
     private AdminService adminService;
 
     @RequestMapping({ "/", "", "index" })
     public String index() {
-        return "/index/upload";
+        return "redirect:/backend/demo/list";
     }
 
     @RequestMapping("/loginAction")

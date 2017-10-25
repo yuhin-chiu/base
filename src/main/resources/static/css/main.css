@@ -418,3 +418,8 @@ tr th {
    width: 160px;
 }
 /* end */
+/* modal */
+.modal-menu > input {
+   margin-right: 10px;
+}
+/* modal end */
