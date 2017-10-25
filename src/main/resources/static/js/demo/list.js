@@ -7,8 +7,8 @@ $(function() {
     var baseUri = 'demo';
     function getOtherCondition() { // 只要把需要提交的参数返回就行了
         return {
-            timeRange : $("#timeRange").val(),
-            query: $("#title").val()
+            timeRange : $("#modal-timeRange").val(),
+            title: $("#modal-title").val()
         }
     }
     var columns = [ {
@@ -72,25 +72,17 @@ $(function() {
         formatter : function(value,row,index) {
             var html = "<a href='javascript:void(0)' onclick='edit(" + row.id + ")'>编辑</a>&nbsp;" +
                     "<a class='remove' href='javascript:void(0)' rowid=" + row.id + ">删除</a>&nbsp;";
-            if(value == 1) {
-                html += "<a class='no' href='javascript:void(0)' rowid=" + row.id + ">关闭</a>"
-            } else {
-                html += "<a class='yes' href='javascript:void(0)' rowid=" + row.id + ">开启</a>"
-            }
+//            if(value == 1) {
+//                html += "<a class='no' href='javascript:void(0)' rowid=" + row.id + ">关闭</a>"
+//            } else {
+//                html += "<a class='yes' href='javascript:void(0)' rowid=" + row.id + ">开启</a>"
+//            }
             return html;
         },
         width : 90
     } ];
 
-    function callback(data) {
-        
-    }
     $("#autotable").baseTable(baseUri, columns, getOtherCondition);
 
-    $("#timeRange").daterangepicker({}, function(start, end, label) {
-        $("#autotable").baseTable.query();
-    });
-
-    $("#modal-queryBtn").click($("#autotable").baseTable.query);
-    $("#modal-table").baseModal(baseUri);
+    $("#modal-table").baseModal(baseUri, $("#autotable").baseTable);
 });

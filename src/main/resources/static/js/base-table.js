@@ -25,7 +25,7 @@ $(function() {
                 window.wxc.xcConfirm("请确认您的操作！",
                         window.wxc.xcConfirm.typeEnum.confirm, {
                             onOk : function() {
-                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: -1}, function(data) {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: -1}, function(data) {
                                     if(data.code == 200) {
                                         window.wxc.xcConfirm("删除成功！", window.wxc.xcConfirm.typeEnum.success, {
                                             onOk: function(v) {
@@ -33,8 +33,10 @@ $(function() {
                                                 //window.location.href = "/backend/" + baseUri + "/list";
                                             }
                                         });
-                                    } else {
-                                        console.log("出现异常，请重试！");
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
                                     }
                                 });
                             }
@@ -46,7 +48,7 @@ $(function() {
                 window.wxc.xcConfirm("请确认您的操作！",
                         window.wxc.xcConfirm.typeEnum.confirm, {
                             onOk : function() {
-                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: 1}, function(data) {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: 1}, function(data) {
                                     if(data.code == 200) {
                                         window.wxc.xcConfirm("设置首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
                                             onOk: function(v) {
@@ -54,8 +56,10 @@ $(function() {
                                                 //window.location.href = "/backend/" + baseUri + "/list";
                                             }
                                         });
-                                    } else {
-                                        console.log("出现异常，请重试！");
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
                                     }
                                 });
                             }
@@ -67,7 +71,7 @@ $(function() {
                 window.wxc.xcConfirm("请确认您的操作！",
                         window.wxc.xcConfirm.typeEnum.confirm, {
                             onOk : function() {
-                                $.post("/api/" + baseUri + "/edit/"+rowid, {status: 0}, function(data) {
+                                $.post("/api/" + baseUri + "/insertOrUpdate", {id: rowid, status: 0}, function(data) {
                                     if(data.code == 200) {
                                         window.wxc.xcConfirm("删除首页推荐成功！", window.wxc.xcConfirm.typeEnum.success, {
                                             onOk: function(v) {
@@ -75,8 +79,10 @@ $(function() {
                                                 //window.location.href = "/backend/" + baseUri + "/list";
                                             }
                                         });
-                                    } else {
-                                        console.log("出现异常，请重试！");
+                                    } else if(data.code == 401) {
+                                        window.wxc.xcConfirm("用户未登录！", window.wxc.xcConfirm.typeEnum.info);
+                                    } else{
+                                        window.wxc.xcConfirm("出现异常，请重试！", window.wxc.xcConfirm.typeEnum.error);
                                     }
                                 });
                             }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
 
+import cn.yx.annotation.AdminOperation;
 import cn.yx.entity.Demo;
 import cn.yx.model.ApiResponse;
 import cn.yx.model.ResponseList;
@@ -47,12 +48,11 @@ public class DemoController extends AbstractController {
         return demoService.getById(id);
     }
 
+    @AdminOperation
     @RequestMapping(value = "/insertOrUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public ApiResponse insertOrUpdate(@RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "title", required = true) String title,
-            @RequestParam(value = "content", required = true) String content) {
-        if (demoService.insertOrUpdate(id, title, content)) {
+    public ApiResponse insertOrUpdate(Demo demo) {
+        if (demoService.insertOrUpdate(demo)) {
             return ApiResponse.successResponse();
         }
         return ApiResponse.exceptionResponse();

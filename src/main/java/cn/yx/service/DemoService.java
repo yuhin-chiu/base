@@ -35,8 +35,9 @@ public class DemoService {
             criteria.andCreateTimeBetween(dates[0], dates[1]);
         }
         if (!StringUtils.isBlank(title)) {
-            criteria.andTitleLike(title);
+            criteria.andTitleLike("%" + title + "%");
         }
+        criteria.andStatusNotEqualTo(-1);
         PageHelper.startPage(page, pageSize);
         return demoMapper.selectByExample(example);
     }
@@ -45,15 +46,11 @@ public class DemoService {
         return demoMapper.selectByPrimaryKey(id);
     }
 
-    public Boolean insertOrUpdate(Long id, String title, String content) {
-        Demo record = new Demo();
-        record.setId(id);
-        record.setContent(content);
-        record.setTitle(title);
-        if (id == null) {
-            return demoMapper.insertSelective(record) > 0 ? true : false;
+    public Boolean insertOrUpdate(Demo demo) {
+        if (demo.getId() == null) {
+            return demoMapper.insertSelective(demo) > 0 ? true : false;
         } else {
-            return demoMapper.updateByPrimaryKeySelective(record) > 0 ? true : false;
+            return demoMapper.updateByPrimaryKeySelective(demo) > 0 ? true : false;
         }
     }
 }

@@ -12,7 +12,7 @@ import cn.yx.model.DialogItem;
  * @version 1.0
  */
 
-public abstract class AbstractorPageController {
+public abstract class DialogPageController {
 
     /**
      * 设置每个页面不同的编辑框项目

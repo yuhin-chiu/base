@@ -18,7 +18,7 @@ import cn.yx.model.DialogItem;
 
 @Controller
 @RequestMapping("/backend/demo")
-public class DemoPageController extends AbstractorPageController {
+public class DemoPageController extends DialogPageController {
     
     
     @RequestMapping({ "/", "", "list" })
@@ -42,8 +42,6 @@ public class DemoPageController extends AbstractorPageController {
             dialogItems.add(content);
         }
     }
-
-
 
     @Override
     protected List<DialogItem> getDailogItems() {

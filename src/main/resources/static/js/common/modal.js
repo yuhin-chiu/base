@@ -5,9 +5,15 @@ $(function () {
     var baseUri = "demo";
     var $this = {};
     
-    var baseModal = function(url) {
+    var baseModal = function(url, table) {
         $this = $(this);
         baseUri = url;
+        
+        $("#modal-timeRange").daterangepicker({}, function(start, end, label) {
+            table.query();
+        });
+
+        $("#modal-queryBtn").click(table.query);
         
         init();
     }
@@ -42,7 +48,9 @@ $(function () {
             });
         },
         clearField: function () {
+            var val = $('#modal-author').val();
             $('.modal input').val('');
+            $('#modal-author').val(val);
             $('.modal textarea').val('');
             if(window.editor) {
                 window.editor.html('');
@@ -51,6 +59,7 @@ $(function () {
         getCondition: function () {
             var params = {};
             params['id'] = $('#modal-id').val();
+            console.log($('#modal-author').val());
             params['author'] = $('#modal-author').val();
 
             var childs = $('#modal-table').children().children().children("td").children();
