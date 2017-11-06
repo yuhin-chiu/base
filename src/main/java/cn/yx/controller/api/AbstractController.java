@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import cn.yx.enums.ApiResponseEnum;
 import cn.yx.model.ApiResponse;
 import cn.yx.service.DemoService;
-import cn.yx.service.NewsService;
 import cn.yx.util.FileUtil;
 
 /**
@@ -26,9 +25,6 @@ public class AbstractController {
 
     @Resource
     protected DemoService demoService;
-
-    @Resource
-    protected NewsService newsService;
 
     protected ApiResponse uploadFiles(HttpServletRequest request, Class<?> clzss) {
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files[]");
