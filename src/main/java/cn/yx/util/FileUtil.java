@@ -43,7 +43,6 @@ public class FileUtil {
      */
     public static ApiResponse uploadFile(MultipartFile file, String fileName, Class clzss) {
         Logger LOGGER = LoggerFactory.getLogger(clzss);
-        ApiResponse resp = new ApiResponse();
         BufferedOutputStream stream = null;
         try {
             byte[] bytes = file.getBytes();
@@ -52,20 +51,18 @@ public class FileUtil {
                     new FileOutputStream(FileUtil.createFileSafe(FileConstant.UPLOAD_FOLDER, fileName)));
             stream.write(bytes);
         } catch (Exception e) {
-            resp.setCode(ApiResponseEnum.FILE_SAVE_FAILED.getCode());
-            resp.setMsg(ApiResponseEnum.FILE_SAVE_FAILED.getContent());
             LOGGER.error("{}", "[uploadFile]Fail: FileName is " + fileName);
+            return ApiResponse.fileSaveError();
         } finally {
             try {
                 stream.close();
             } catch (IOException e) {
-                resp.setCode(ApiResponseEnum.INTERNAL_ERROR.getCode());
                 e.printStackTrace();
+                return ApiResponse.exceptionResponse();
             }
         }
         LOGGER.info("{}", "[uploadFile]Success: FileName is " + fileName);
-        resp.setData(fileName);
-        return resp;
+        return ApiResponse.successResponse().setData(fileName);
     }
 
     public static void downloadFile(String fileName, BufferedOutputStream out, Class clzss) throws IOException {

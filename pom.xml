@@ -144,7 +144,7 @@
    </dependencies>
 
    <build>
-      <finalName>base_project</finalName>
+      <finalName>jinchi_project</finalName>
       <plugins>
          <plugin>
             <groupId>org.springframework.boot</groupId>

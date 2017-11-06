@@ -13,5 +13,46 @@
     <table schema="demo" tableName="demo" enableCountByExample="false" enableUpdateByExample="false"  
             enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false">
     </table>
+
+   <table schema="jc_about" tableName="jc_about"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_banner" tableName="jc_banner"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_contact" tableName="jc_contact"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_culture" tableName="jc_culture"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_homepage" tableName="jc_homepage"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_honor" tableName="jc_honor"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_news" tableName="jc_news"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
+   <table schema="jc_product" tableName="jc_product"
+      enableCountByExample="false" enableUpdateByExample="false"
+      enableDeleteByExample="false" enableSelectByExample="true"
+      selectByExampleQueryId="false">
+   </table>
   </context>
 </generatorConfiguration>
