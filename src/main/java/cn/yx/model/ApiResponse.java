@@ -138,6 +138,12 @@ public class ApiResponse {
         return response;
     }
 
+    public Boolean isSuccess() {
+        if(this.getCode() != null && this.getCode().equals(ApiResponseEnum.SUCCESS.getCode())) {
+            return true;
+        }
+        return false;
+    }
     public Integer getCurrentPage() {
         return currentPage;
     }

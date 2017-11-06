@@ -9,8 +9,7 @@
    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="/js/moment.min.js"></script>
    <script type="text/javascript" src="/js/daterangepicker.js"></script>
-   <script type="text/javascript"
-      src="/js/bootstrap-datetimepicker.min.js"></script>
+   <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
    <script type="text/javascript" src="/js/xcConfirm.js"></script>
    <script type="text/javascript" src="/js/jquery.md5.js"></script>
    <script type="text/javascript" src="/js/jquery-form.js"></script>
@@ -18,6 +17,9 @@
    <script type="text/javascript" src="/js/timeUtil.js"></script>
    <script type="text/javascript" src="/js/bootstrap-table.js"></script>
    
+   <script type="text/javascript" src="/js/kindeditor-min.js"></script>
+   <script type="text/javascript" src="/js/lang/zh_CN.js"></script>
+
    <script type="text/javascript" src="/js/base-table.js"></script>
    <script type="text/javascript" src="/js/common/modal.js"></script>
    
@@ -47,6 +49,9 @@
                <div class="h-item f-right others">
                   <span>其他</span>
                </div>
+               <div class="h-item f-right news">
+                  <span>新闻</span>
+               </div>
                <span class="f-left"
                   style="margin-top: 40px; margin-left: 10px; color: white">
                   <span th:text="${admin.userName}"></span> <a
@@ -54,6 +59,13 @@
                </span>
                <div class="clear"></div>
             </div>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="news">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">新闻列表</span></a>
          </div>
       </div>
    </th:block>

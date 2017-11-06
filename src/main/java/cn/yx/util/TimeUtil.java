@@ -47,7 +47,9 @@ public class TimeUtil {
     public static String formatTime(Long seconds) {
         return getTimeFormat().format(new Date(seconds * 1000));
     }
-
+    public static String formatDataToTime(Date date) {
+        return getTimeFormat().format(date);
+    }
     /**
      * 将时间秒数转成yyyy-MM-dd
      * 
@@ -57,7 +59,9 @@ public class TimeUtil {
     public static String formatDay(Long seconds) {
         return getDayFormat().format(new Date(seconds * 1000));
     }
-
+    public static String formatDateToDay(Date date) {
+        return getDayFormat().format(date);
+    }
     /**
      * 将yyyy-MM-dd格式转成时间秒数
      * 

@@ -1,5 +1,8 @@
 package cn.yx.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.yx.enums.DialogItemEnum;
 
 /**
@@ -15,6 +18,8 @@ public class DialogItem {
     private String type = DialogItemEnum.TEXT.getStr(); // (text、textarea、editor、radio、checkbox、select)
     private String placeholder;
 
+    private List<SelectItem> selectItems;
+
     private Integer minLength = 1;
     private Integer maxLength = 30;
 
@@ -27,14 +32,14 @@ public class DialogItem {
         super();
         this.id = id;
         this.title = title;
-        this.placeholder = (minLength > 0 ? "不能为空且" : "") + "最大长度不超过" + maxLength;
+        this.placeholder = "不能为空且最大长度不超过30";
     }
     public DialogItem(String id, String title, String type) {
         super();
         this.id = id;
         this.title = title;
         this.type = type;
-        this.placeholder = (minLength > 0 ? "不能为空且" : "") + "最大长度不超过" + maxLength;
+        this.placeholder = "不能为空且最大长度不超过30";
     }
 
     public DialogItem() {
@@ -80,6 +85,12 @@ public class DialogItem {
         this.minLength = minLength;
     }
 
+    public void setLength(Integer minLength, Integer maxLength) {
+        this.minLength = minLength;
+        this.maxLength = maxLength;
+        this.placeholder = (minLength > 0 ? "不能为空且" : "") + "最大长度不超过" + maxLength;
+    }
+
     public Integer getMaxLength() {
         return maxLength;
     }
@@ -88,4 +99,37 @@ public class DialogItem {
         this.maxLength = maxLength;
     }
 
+    public List<SelectItem> getSelectItems() {
+        return selectItems;
+    }
+
+    public void addSelectItem(Integer key, String value) {
+        if(selectItems == null) {
+            selectItems = new ArrayList<SelectItem>();
+        }
+        selectItems.add(new SelectItem(key, value));
+    }
+    
+
+    class SelectItem {
+        private Integer key;
+        private String value;
+        public SelectItem(Integer key, String value) {
+            super();
+            this.key = key;
+            this.value = value;
+        }
+        public Integer getKey() {
+            return key;
+        }
+        public void setKey(Integer key) {
+            this.key = key;
+        }
+        public String getValue() {
+            return value;
+        }
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
 }

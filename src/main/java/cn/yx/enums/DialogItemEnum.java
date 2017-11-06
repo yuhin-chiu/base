@@ -8,7 +8,7 @@ package cn.yx.enums;
 
 public enum DialogItemEnum {
 
-    TEXT(1, "text"), TEXTAREA(2, "textarea"), EDITOR(3, "editor");
+    TEXT(1, "text"), TEXTAREA(2, "textarea"), EDITOR(3, "editor"), SELECT(4, "select"), IMAGE(5, "image");
 
     private Integer code;
     private String str;

@@ -4,6 +4,7 @@
 $(function () {
     var baseUri = "demo";
     var $this = {};
+    var imgTypes = [ 'jpg', 'png', 'jpeg' ];
     
     var baseModal = function(url, table) {
         $this = $(this);
@@ -31,19 +32,30 @@ $(function () {
                 return;
             }
 
-            params = events.getCondition();
-
-            $.post("/api/" + baseUri + "/insertOrUpdate", params, function(data) {
-                if (data.code == 200) {
-                    $("#autotable").baseTable.query();
-                    $('.modal').modal('hide');
-                    window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success);
-                } else {
-                    if(data.msg==undefined){
-                        window.wxc.xcConfirm("错误！", window.wxc.xcConfirm.typeEnum.error);
-                    }else{
-                        window.wxc.xcConfirm(data.msg, window.wxc.xcConfirm.typeEnum.error);
+            var formData = events.getCondition();
+            $.ajax({
+                url : '/api/' + baseUri + '/insertOrUpdate',
+                type : 'post',
+                data : formData,
+                processData : false,
+                contentType : false,
+                success : function(data) {
+                    if (data.code == 200) {
+                        $("#autotable").baseTable.query();
+                        $('.modal').modal('hide');
+                        window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success);
+                    } else {
+                        if(data.msg==undefined){
+                            window.wxc.xcConfirm("错误！", window.wxc.xcConfirm.typeEnum.error);
+                        }else{
+                            window.wxc.xcConfirm(data.msg, window.wxc.xcConfirm.typeEnum.error);
+                        }
                     }
+                },
+                error : function(err) {
+                    $(".mask").hide();
+                    window.wxc.xcConfirm("发布失败！",
+                            window.wxc.xcConfirm.typeEnum.error);
                 }
             });
         },
@@ -57,21 +69,24 @@ $(function () {
             }
         },
         getCondition: function () {
-            var params = {};
-            params['id'] = $('#modal-id').val();
-            console.log($('#modal-author').val());
-            params['author'] = $('#modal-author').val();
+            var formData = new FormData();
+            formData.append('id', $('#modal-id').val());
+            formData.append('author', $('#modal-author').val());
 
             var childs = $('#modal-table').children().children().children("td").children();
             for(var i = 0; i < childs.length; i++) {
                 var item = $(childs[i]);
-                if(item.attr('type') == 'text' || item.attr('type') == 'textarea') {
-                    params[item.attr('key')] = item.val();
+                if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'select') {
+                    formData.append(item.attr('key'), item.val());
                 } else if(item.attr('type') == 'editor') {
-                    params[item.attr('key')] = window.editor.html();
+                    formData.append(item.attr('key'), window.editor.html());
+                } else if(item.attr('type') == 'file' || item.attr('type') == 'image') {
+                    formData.append(item.attr('key'), item[0].files[0]);
+                } else {
+                    console.log(item.attr('type'));
                 }
             }
-            return params;
+            return formData;
         },
         setCondition: function (data) {
             var childs = $('#modal-table').children().children().children("td").children();
@@ -91,36 +106,57 @@ $(function () {
     function event_bind() {
 
         $("#modal-addBtn").click(events.clearField);
-        
+
         $("#modal-saveBtn").click(events.save);
         edit = events.edit;
+
+        $(".modal-select").chosen({
+            disable_search: true
+        });
+        $("#modal-table .chosen-container").width('50%');
 
     }
 
     function check() {
-//        var childs = $('#modal-table').children().children().children("td").children();
-//        for(var i = 0; i < childs.length; i++) {
-//            var item = $(childs[i]);
-//            if(item.attr('type') == 'text' || item.attr('type') == 'textarea') {
-//                item.val(data[item.attr('key')]);
-//            } else if(item.attr('type') == 'editor') {
-//                window.editor.html(data[item.attr('key')]);
-//            }
-//        }
-//        var title = $('.title').val();
-//        var content = $('.content').val();
-//        var count = $(".count").text();
-//
-//        var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-//
-//        if (count == 0 || count > 500) {
-//            alert('描述不能为空且不超过500字,当前字数' + count + '字！');
-//            return false;
-//        }
-//        if (title.length == 0 || title.length > 30) {
-//            alert('标题不能为空且不超过30字,当前字数' + title.length + '字！');
-//            return false;
-//        }
+        var childs = $('#modal-table').children().children().children("td").children();
+        for(var i = 0; i < childs.length; i++) {
+            var item = $(childs[i]);
+            if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'editor') {
+                var content;
+                if(item.attr('type') == 'editor') {
+                    content = window.editor.html();
+                } else {
+                    content = item.val();
+                }
+                var minLength = item.attr('minLength');
+                var maxLength = item.attr('maxLength'); 
+                var title = item.attr('title');
+                var count = content.length;
+                if(count < minLength) {
+                    alert(title + '不能为空！');
+                    return false;
+                } else if(count > maxLength) {
+                    alert(title + '不能超过' + maxLength + '字,当前字数：' + count);
+                    return false;
+                }
+            } else if(item.attr('type') == 'file' && !$('#modal-id').val()) {
+                if(item[0].files.length == 0) {
+                    alert('图片必须上传！');
+                    return false;
+                } else {
+                    var name = item[0].files[0].name;
+                    var infos = name.split('.');
+                    var type = infos[infos.length - 1];
+                    if (imgTypes.indexOf(type) == -1) { // 当前只支持图片上传
+                        window.wxc.xcConfirm("只支持图片上传！（jpg、jpeg、png）",
+                                window.wxc.xcConfirm.typeEnum.info);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
 
         return true;
     }

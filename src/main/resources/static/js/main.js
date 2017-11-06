@@ -8,10 +8,29 @@ $(function () {
             $(".header-content .header-main ." + type).addClass("selected");
         },
         jump: function () {
+            console.log("jump");
             if ($(this).hasClass("selected")) {
                 return;
             }
             var type = $(this).text();
+            
+            if (type == "新闻") {
+                location.href = "/backend/news";
+            } else if (type == "同期活动") {
+                location.href = "/backend/activities";
+            } else if (type == "展商推荐") {
+                location.href = "/backend/companies";
+            } else if (type == "合作媒体") {
+                location.href = "/backend/medias";
+            } else if (type == "历届回顾") {
+                location.href = "/backend/histories";
+            } else if (type == "申请管理") {
+                location.href = "/backend/applies";
+            } else if (type == "下载管理") {
+                location.href = "/backend/downloads";
+            } else if(type == "其他"){
+                location.href = "/backend/demo";
+            }
         }
     };
 
