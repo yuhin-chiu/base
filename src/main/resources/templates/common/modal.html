@@ -22,7 +22,7 @@
                                </select>
                                <textarea th:if="${item.type} == 'textarea'" 
                                     th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, placeholder=${item.placeholder}, type=${item.type}, title=${item.title}" 
-                                    style="width: 100%; height: 76px"></textarea>
+                                    style="width: 100%; height: 76px;resize:none;"></textarea>
                                <input th:if="${item.type} == 'image'" type="file" multiple="multiple" 
                                     th:attr="key=${item.id}, name=${item.id}, title=${item.title}, type='file'"/>
                                <textarea th:if="${item.type} == 'editor'" name="editor"

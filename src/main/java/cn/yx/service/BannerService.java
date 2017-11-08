@@ -11,34 +11,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 
-import cn.yx.entity.JcProduct;
-import cn.yx.entity.JcProductExample;
-import cn.yx.mapper.JcProductMapper;
+import cn.yx.entity.JcBanner;
+import cn.yx.entity.JcBannerExample;
+import cn.yx.mapper.JcBannerMapper;
 import cn.yx.util.TimeUtil;
 
 /**
  * @author yuxuanjiao
- * @date 2017年10月19日 下午8:46:51
+ * @date 2017年11月7日 上午10:49:45
  * @version 1.0
  */
 
 @Service
-public class ProductService extends AbstractService {
+public class BannerService extends AbstractService {
 
     @Resource
-    private JcProductMapper productMapper;
+    private JcBannerMapper bannerMapper;
 
-    public List<JcProduct> list(String title, String timeRange, Integer lang, int page, int pageSize) {
-        JcProductExample example = new JcProductExample();
+    public List<JcBanner> list(String timeRange, Integer lang, int page, int pageSize) {
+        JcBannerExample example = new JcBannerExample();
         example.setOrderByClause("create_time desc");
 
-        JcProductExample.Criteria criteria = example.createCriteria();
+        JcBannerExample.Criteria criteria = example.createCriteria();
         if (!StringUtils.isBlank(timeRange)) {
             Date[] dates = TimeUtil.splitDayRangeToDateBig(timeRange);
             criteria.andCreateTimeBetween(dates[0], dates[1]);
-        }
-        if (!StringUtils.isBlank(title)) {
-            criteria.andTitleLike("%" + title + "%");
         }
         if (lang == null) {
             lang = 0;
@@ -48,53 +45,53 @@ public class ProductService extends AbstractService {
 
         // query
         PageHelper.startPage(page, pageSize);
-        List<JcProduct> list = productMapper.selectByExample(example);
+        List<JcBanner> list = bannerMapper.selectByExample(example);
 
         // format to String
         list.forEach(e -> {
-            e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
-            e.setCreateTime(null);
+            e.setImgUrl(parseUri2Url(e.getImgKey()));
+            e.setImgKey(null);
         });
         return list;
     }
 
-    public JcProduct getById(Integer id) {
-        JcProduct e = productMapper.selectByPrimaryKey(id);
-        e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
-        e.setCreateTime(null);
-        return e;
+    public JcBanner getById(Integer id) {
+        JcBanner banner = bannerMapper.selectByPrimaryKey(id);
+        banner.setImgUrl(parseUri2Url(banner.getImgKey()));
+        banner.setImgKey(null);
+        return banner;
     }
 
-    public Boolean insertOrUpdate(JcProduct demo) {
+    public Boolean insertOrUpdate(JcBanner demo) {
         if (demo.getId() == null) {
             return this.insertLang(demo) > 0 ? true : false;
         } else if (demo.getStatus() != null && demo.getStatus().equals(-1)) {
             return deleteLang(demo.getId());
         } else {
-            return productMapper.updateByPrimaryKeySelective(demo) > 0 ? true : false;
+            return bannerMapper.updateByPrimaryKeySelective(demo) > 0 ? true : false;
         }
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Integer insertLang(JcProduct demo) {
+    public Integer insertLang(JcBanner demo) {
         // 这里的逻辑是插入第一条是中文的，同时插一条英文的，这里返回的是英文版的id
-        productMapper.insertSelective(demo);
+        bannerMapper.insertSelective(demo);
         demo.setLang(1);
         if (demo.getId() != null) {
             demo.setId(demo.getId() + 1);
         }
-        return productMapper.insertSelective(demo);
+        return bannerMapper.insertSelective(demo);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteLang(Integer id) {
-        JcProduct news = new JcProduct();
+        JcBanner news = new JcBanner();
         news.setId(id);
         news.setStatus(-1);
-        if (productMapper.updateByPrimaryKeySelective(news) <= 0) {
+        if (bannerMapper.updateByPrimaryKeySelective(news) <= 0) {
             return false;
         }
         news.setId(id + 1);
-        return productMapper.updateByPrimaryKeySelective(news) > 0 ? true : false;
+        return bannerMapper.updateByPrimaryKeySelective(news) > 0 ? true : false;
     }
 }

@@ -30,7 +30,7 @@ public class DemoController extends AbstractController {
     public ResponseList demoList(@RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "timeRange", required = false) String timeRange,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "page", defaultValue = "1") Integer page) {
+            @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {
         if (pageSize == null || pageSize > 100 || pageSize < 0) {
             pageSize = 15;
         }

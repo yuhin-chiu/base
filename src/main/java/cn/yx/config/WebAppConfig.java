@@ -57,9 +57,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
         FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
-        SerializerFeature[] features = new SerializerFeature[] { SerializerFeature.WriteNonStringKeyAsString,
-                SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteNullStringAsEmpty,
-                SerializerFeature.WriteNullBooleanAsFalse, SerializerFeature.PrettyFormat};
+        SerializerFeature[] features = new SerializerFeature[] {SerializerFeature.PrettyFormat};
         fastJsonHttpMessageConverter.setFeatures(features);
         // StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
         // converters.add(stringHttpMessageConverter);

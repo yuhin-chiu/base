@@ -14,12 +14,12 @@ $(function () {
             }
             var type = $(this).text();
             
-            if (type == "新闻") {
+            if (type == "新闻中心") {
                 location.href = "/backend/news";
-            } else if (type == "同期活动") {
-                location.href = "/backend/activities";
-            } else if (type == "展商推荐") {
-                location.href = "/backend/companies";
+            } else if (type == "津弛产品") {
+                location.href = "/backend/product";
+            } else if (type == "关于津弛") {
+                location.href = "/backend/about";
             } else if (type == "合作媒体") {
                 location.href = "/backend/medias";
             } else if (type == "历届回顾") {

@@ -12,8 +12,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.yx.enums.ApiResponseEnum;
 import cn.yx.model.ApiResponse;
+import cn.yx.service.AboutService;
+import cn.yx.service.BannerService;
+import cn.yx.service.ContactService;
+import cn.yx.service.CultureService;
 import cn.yx.service.DemoService;
+import cn.yx.service.HomepageService;
 import cn.yx.service.NewsService;
+import cn.yx.service.ProductService;
 import cn.yx.util.FileUtil;
 
 /**
@@ -30,13 +36,31 @@ public class AbstractController {
     @Resource
     protected NewsService newsService;
 
+    @Resource
+    protected HomepageService homepageService;
+
+    @Resource
+    protected AboutService aboutService;
+
+    @Resource
+    protected BannerService bannerService;
+
+    @Resource
+    protected ContactService contactService;
+
+    @Resource
+    protected CultureService cultureService;
+
+    @Resource
+    protected ProductService productService;
+
     protected ApiResponse uploadFiles(HttpServletRequest request, Class<?> clzss) {
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files[]");
         MultipartFile file = null;
         List<String> annexs = new ArrayList<>();
         ApiResponse temp, resp = new ApiResponse();
 
-        if(files == null || files.size() == 0) {
+        if (files == null || files.size() == 0) {
             resp.setCode(-1);
             return resp;
         }
@@ -48,7 +72,7 @@ public class AbstractController {
                 if (temp.getCode().compareTo(ApiResponseEnum.SUCCESS.getCode()) != 0) {
                     return temp;
                 }
-                
+
                 annexs.add((String) temp.getData());
             } else {
                 return ApiResponse.fileSaveEmpty();
@@ -57,7 +81,6 @@ public class AbstractController {
 
         return ApiResponse.successResponse().setData(StringUtils.join(annexs, ","));
     }
-
 
     protected ApiResponse uploadFile(HttpServletRequest request, Class<?> clzss, String key) {
         MultipartFile file = ((MultipartHttpServletRequest) request).getFile(key);

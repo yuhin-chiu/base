@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 
-import cn.yx.entity.JcProduct;
-import cn.yx.entity.JcProductExample;
-import cn.yx.mapper.JcProductMapper;
+import cn.yx.entity.JcContact;
+import cn.yx.entity.JcContactExample;
+import cn.yx.mapper.JcContactMapper;
 import cn.yx.util.TimeUtil;
 
 /**
@@ -23,78 +23,81 @@ import cn.yx.util.TimeUtil;
  */
 
 @Service
-public class ProductService extends AbstractService {
+public class ContactService extends AbstractService {
 
     @Resource
-    private JcProductMapper productMapper;
+    private JcContactMapper contactMapper;
 
-    public List<JcProduct> list(String title, String timeRange, Integer lang, int page, int pageSize) {
-        JcProductExample example = new JcProductExample();
+    public List<JcContact> list(Integer parent, String timeRange, Integer lang, int page, int pageSize) {
+        JcContactExample example = new JcContactExample();
         example.setOrderByClause("create_time desc");
 
-        JcProductExample.Criteria criteria = example.createCriteria();
+        JcContactExample.Criteria criteria = example.createCriteria();
         if (!StringUtils.isBlank(timeRange)) {
             Date[] dates = TimeUtil.splitDayRangeToDateBig(timeRange);
             criteria.andCreateTimeBetween(dates[0], dates[1]);
-        }
-        if (!StringUtils.isBlank(title)) {
-            criteria.andTitleLike("%" + title + "%");
         }
         if (lang == null) {
             lang = 0;
         }
         criteria.andLangEqualTo(lang);
         criteria.andStatusNotEqualTo(-1);
+        criteria.andParentEqualTo(parent);
 
         // query
         PageHelper.startPage(page, pageSize);
-        List<JcProduct> list = productMapper.selectByExample(example);
+        List<JcContact> list = contactMapper.selectByExampleWithBLOBs(example);
 
         // format to String
         list.forEach(e -> {
             e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
+            e.setImgUrl(parseUri2Url(e.getImgKey()));
             e.setCreateTime(null);
+            e.setImgKey(null);
         });
         return list;
     }
 
-    public JcProduct getById(Integer id) {
-        JcProduct e = productMapper.selectByPrimaryKey(id);
+    public JcContact getById(Integer id) {
+        JcContact e = contactMapper.selectByPrimaryKey(id);
         e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
+        e.setImgUrl(parseUri2Url(e.getImgKey()));
         e.setCreateTime(null);
+        e.setImgKey(null);
         return e;
     }
 
-    public Boolean insertOrUpdate(JcProduct demo) {
+    public Boolean insertOrUpdate(JcContact demo) {
         if (demo.getId() == null) {
             return this.insertLang(demo) > 0 ? true : false;
         } else if (demo.getStatus() != null && demo.getStatus().equals(-1)) {
             return deleteLang(demo.getId());
         } else {
-            return productMapper.updateByPrimaryKeySelective(demo) > 0 ? true : false;
+            return contactMapper.updateByPrimaryKeySelective(demo) > 0 ? true : false;
         }
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Integer insertLang(JcProduct demo) {
+    public Integer insertLang(JcContact demo) {
         // 这里的逻辑是插入第一条是中文的，同时插一条英文的，这里返回的是英文版的id
-        productMapper.insertSelective(demo);
+        contactMapper.insertSelective(demo);
         demo.setLang(1);
         if (demo.getId() != null) {
             demo.setId(demo.getId() + 1);
         }
-        return productMapper.insertSelective(demo);
+        return contactMapper.insertSelective(demo);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteLang(Integer id) {
-        JcProduct news = new JcProduct();
-        news.setId(id);
-        news.setStatus(-1);
-        if (productMapper.updateByPrimaryKeySelective(news) <= 0) {
+        JcContact contact = new JcContact();
+        contact.setId(id);
+        contact.setStatus(-1);
+        if (contactMapper.updateByPrimaryKeySelective(contact) <= 0) {
             return false;
         }
-        news.setId(id + 1);
-        return productMapper.updateByPrimaryKeySelective(news) > 0 ? true : false;
+        contact.setId(id + 1);
+        return contactMapper.updateByPrimaryKeySelective(contact) > 0 ? true : false;
     }
+    // 需要确定一下图片更新是否中英文全更新
 }

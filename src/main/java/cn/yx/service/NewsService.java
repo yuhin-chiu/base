@@ -23,12 +23,12 @@ import cn.yx.util.TimeUtil;
  */
 
 @Service
-public class NewsService extends AbstractService{
+public class NewsService extends AbstractService {
 
     @Resource
     private JcNewsMapper newsMapper;
 
-    public List<JcNews> list(String title, String timeRange, Integer lang, int page, int pageSize) {
+    public List<JcNews> list(String title, Integer parent, String timeRange, Integer lang, int page, int pageSize) {
         JcNewsExample example = new JcNewsExample();
         example.setOrderByClause("create_time desc");
 
@@ -45,6 +45,7 @@ public class NewsService extends AbstractService{
         }
         criteria.andLangEqualTo(lang);
         criteria.andStatusNotEqualTo(-1);
+        criteria.andParentEqualTo(parent);
 
         // query
         PageHelper.startPage(page, pageSize);
@@ -52,14 +53,21 @@ public class NewsService extends AbstractService{
 
         // format to String
         list.forEach(e -> {
-                e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
-                e.setImgUrl(parseUri2Url(e.getImgKey()));
-            });
+            e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
+            e.setImgUrl(parseUri2Url(e.getImgKey()));
+            e.setCreateTime(null);
+            e.setImgKey(null);
+        });
         return list;
     }
 
     public JcNews getById(Integer id) {
-        return newsMapper.selectByPrimaryKey(id);
+        JcNews e = newsMapper.selectByPrimaryKey(id);
+        e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
+        e.setImgUrl(parseUri2Url(e.getImgKey()));
+        e.setCreateTime(null);
+        e.setImgKey(null);
+        return e;
     }
 
     public Boolean insertOrUpdate(JcNews demo) {

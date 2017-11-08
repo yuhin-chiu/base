@@ -56,6 +56,7 @@ public class JcProduct {
      * @mbg.generated Mon Nov 06 14:42:09 CST 2017
      */
     private Date createTime;
+    private String createTimeStr;
 
     /**
      *
@@ -265,5 +266,13 @@ public class JcProduct {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

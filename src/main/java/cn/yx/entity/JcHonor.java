@@ -20,6 +20,7 @@ public class JcHonor {
      * @mbg.generated Mon Nov 06 14:42:09 CST 2017
      */
     private String imgKey;
+    private String imgUrl;
 
     /**
      *
@@ -38,6 +39,7 @@ public class JcHonor {
      * @mbg.generated Mon Nov 06 14:42:09 CST 2017
      */
     private Date createTime;
+    private String createTimeStr;
 
     /**
      *
@@ -199,5 +201,21 @@ public class JcHonor {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

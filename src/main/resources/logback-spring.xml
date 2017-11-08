@@ -16,11 +16,11 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
-        <File>${LOG_DIR}/broker-app.log</File>
+        <File>${LOG_DIR}/sys.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
             <fileNamePattern>
-                <fileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/broker-app.log_%d</fileNamePattern>
+                <fileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/sys.log_%d</fileNamePattern>
             </fileNamePattern>
             <maxHistory>90</maxHistory>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
@@ -54,9 +54,9 @@
             <level>ERROR</level>
         </filter>
 
-        <File>${LOG_DIR}/broker-app.error.log</File>
+        <File>${LOG_DIR}/sys.error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/%d.broker-app.error.log
+            <FileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/%d.sys.error.log
             </FileNamePattern>
             <maxHistory>90</maxHistory>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
@@ -72,9 +72,9 @@
             <level>WARN</level>
         </filter>
 
-        <File>${LOG_DIR}/broker-app.warn.log</File>
+        <File>${LOG_DIR}/sys.warn.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/%d.broker-app.warn.log
+            <FileNamePattern>${LOG_DIR}/history/%d{yyyy-MM,aux}/%d.sys.warn.log
             </FileNamePattern>
             <maxHistory>90</maxHistory>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>

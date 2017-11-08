@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.Page;
 
 import cn.yx.annotation.AdminOperation;
-import cn.yx.entity.JcNews;
+import cn.yx.entity.JcCulture;
 import cn.yx.model.ApiResponse;
 import cn.yx.model.ResponseList;
 
@@ -24,54 +24,53 @@ import cn.yx.model.ResponseList;
  */
 
 @RestController
-@RequestMapping("/api/news")
-public class NewsController extends AbstractController {
+@RequestMapping("/api/culture")
+public class CultureController extends AbstractController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResponseList newsList(@RequestParam(value = "title", required = false) String title,
+    public ResponseList cultureList(@RequestParam(value = "parent", defaultValue = "0") Integer parent,
             @RequestParam(value = "lang", required = false) Integer lang,
-            @RequestParam(value = "parent", defaultValue = "0") Integer parent,
             @RequestParam(value = "timeRange", required = false) String timeRange,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {
         if (pageSize == null || pageSize > 100 || pageSize < 0) {
-            pageSize = 10;
+            pageSize = 15;
         }
         if (page == null || page < 1) {
             page = 1;
         }
-        List<JcNews> list = newsService.list(title, parent, timeRange, lang, page, pageSize);
-        Long total = ((Page<JcNews>) list).getTotal();
+        List<JcCulture> list = cultureService.list(parent, timeRange, lang, page, pageSize);
+        Long total = ((Page<JcCulture>) list).getTotal();
         return ResponseList.rows(list).total(total);
     }
 
     @RequestMapping("/getById")
     @ResponseBody
-    public JcNews getById(@RequestParam(value = "id", required = true) Integer id) {
-        return newsService.getById(id);
+    public JcCulture getById(@RequestParam(value = "id", required = true) Integer id) {
+        return cultureService.getById(id);
     }
 
     @AdminOperation
     @RequestMapping(value = "/insertOrUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public ApiResponse insertOrUpdate(JcNews news, HttpServletRequest request) {
+    public ApiResponse insertOrUpdate(JcCulture culture, HttpServletRequest request) {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
-        if (news.getId() == null) {
+        if (culture.getId() == null) {
             if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
-                news.setImgKey(imgKey);
+                culture.setImgKey(imgKey);
             } else {
                 return temp;
             }
-        } else if (news.getId() != null) {
+        } else if (culture.getId() != null) {
             if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
-                news.setImgKey(imgKey);
+                culture.setImgKey(imgKey);
             }
         }
-        if (newsService.insertOrUpdate(news)) {
+        if (cultureService.insertOrUpdate(culture)) {
             return ApiResponse.successResponse();
         }
         return ApiResponse.exceptionResponse();

@@ -41,7 +41,7 @@ public class AppTests {
     
     @Test
     public void testList() {
-        List<JcNews> list = newsService.list(null, null, 0, 1, 20);
+        List<JcNews> list = newsService.list(null, null, null, 0, 1, 20);
         list.forEach(e -> System.out.println(e.getCreateTime() + " == " + e.getContent()));
     }
 }

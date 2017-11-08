@@ -49,8 +49,14 @@
                <div class="h-item f-right others">
                   <span>其他</span>
                </div>
+               <div class="h-item f-right about">
+                  <span>关于津弛</span>
+               </div>
                <div class="h-item f-right news">
-                  <span>新闻</span>
+                  <span>新闻中心</span>
+               </div>
+               <div class="h-item f-right product">
+                  <span>津弛产品</span>
                </div>
                <span class="f-left"
                   style="margin-top: 40px; margin-left: 10px; color: white">
@@ -62,10 +68,24 @@
          </div>
       </div>
    </th:block>
+   <th:block th:fragment="product">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">产品列表</span></a>
+         </div>
+      </div>
+   </th:block>
    <th:block th:fragment="news">
       <div class="main">
          <div class="tag-list">
             <a href="javascript:void(0);"><span class="list">新闻列表</span></a>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="about">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">荣誉资质</span></a>
          </div>
       </div>
    </th:block>
