@@ -13,7 +13,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.yx.config.holder.AdminInfoHolder;
 import cn.yx.model.Admin;
-import cn.yx.model.ApiResponse;
 import cn.yx.service.AdminService;
 import cn.yx.util.MD5Util;
 
@@ -32,7 +31,7 @@ public class BasePageController {
 
     @RequestMapping({ "/", "", "index" })
     public String index() {
-        return "redirect:/backend/news";
+        return "redirect:/backend/culture";
     }
 
     @RequestMapping("/loginAction")

@@ -57,18 +57,9 @@ public class CultureController extends AbstractController {
     public ApiResponse insertOrUpdate(JcCulture culture, HttpServletRequest request) {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
-        if (culture.getId() == null) {
-            if (temp.isSuccess()) {
-                String imgKey = (String) temp.getData();
-                culture.setImgKey(imgKey);
-            } else {
-                return temp;
-            }
-        } else if (culture.getId() != null) {
-            if (temp.isSuccess()) {
-                String imgKey = (String) temp.getData();
-                culture.setImgKey(imgKey);
-            }
+        if (temp.isSuccess()) {
+            String imgKey = (String) temp.getData();
+            culture.setImgKey(imgKey);
         }
         if (cultureService.insertOrUpdate(culture)) {
             return ApiResponse.successResponse();

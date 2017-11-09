@@ -68,6 +68,9 @@ public class CultureService extends AbstractService {
     }
 
     public Boolean insertOrUpdate(JcCulture demo) {
+        if (demo.getImgKey() != null) { // 表示是文化理念和员工生活
+            return cultureMapper.insertSelective(demo) > 0 ? true : false;
+        }
         if (demo.getId() == null) {
             return this.insertLang(demo) > 0 ? true : false;
         } else if (demo.getStatus() != null && demo.getStatus().equals(-1)) {

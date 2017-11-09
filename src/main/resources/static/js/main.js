@@ -8,7 +8,6 @@ $(function () {
             $(".header-content .header-main ." + type).addClass("selected");
         },
         jump: function () {
-            console.log("jump");
             if ($(this).hasClass("selected")) {
                 return;
             }
@@ -20,12 +19,12 @@ $(function () {
                 location.href = "/backend/product";
             } else if (type == "关于津弛") {
                 location.href = "/backend/about";
-            } else if (type == "合作媒体") {
-                location.href = "/backend/medias";
-            } else if (type == "历届回顾") {
-                location.href = "/backend/histories";
-            } else if (type == "申请管理") {
-                location.href = "/backend/applies";
+            } else if (type == "首页") {
+                location.href = "/backend/homepage";
+            } else if (type == "企业文化") {
+                location.href = "/backend/culture";
+            } else if (type == "联系我们") {
+                location.href = "/backend/contact";
             } else if (type == "下载管理") {
                 location.href = "/backend/downloads";
             } else if(type == "其他"){

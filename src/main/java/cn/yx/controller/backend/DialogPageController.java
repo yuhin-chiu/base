@@ -28,4 +28,16 @@ public abstract class DialogPageController {
         initDialogItems();
         model.addAttribute("dialogItems", getDailogItems());
     }
+
+    abstract void initPresentItems();
+    
+    /**
+     * 获取到PresentItems单例
+     */
+    abstract List<DialogItem> getPresentItems(Integer type);
+    
+    protected void setPresentItems(Model model, Integer type) {
+        initPresentItems();
+        model.addAttribute("presentItems", getPresentItems(type));
+    }
 }

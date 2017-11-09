@@ -22,6 +22,7 @@
 
    <script type="text/javascript" src="/js/base-table.js"></script>
    <script type="text/javascript" src="/js/common/modal.js"></script>
+   <script type="text/javascript" src="/js/common/present.js"></script>
    
    <link rel="Stylesheet" type="text/css" href="/css/main.css" />
    <link rel="Stylesheet" type="text/css" href="/css/chosen.css" />
@@ -49,14 +50,23 @@
                <div class="h-item f-right others">
                   <span>其他</span>
                </div>
-               <div class="h-item f-right about">
-                  <span>关于津弛</span>
+               <div class="h-item f-right contact">
+                  <span>联系我们</span>
                </div>
                <div class="h-item f-right news">
                   <span>新闻中心</span>
                </div>
                <div class="h-item f-right product">
                   <span>津弛产品</span>
+               </div>
+               <div class="h-item f-right culture">
+                  <span>企业文化</span>
+               </div>
+               <div class="h-item f-right about">
+                  <span>关于津弛</span>
+               </div>
+               <div class="h-item f-right homepage">
+                  <span>首页</span>
                </div>
                <span class="f-left"
                   style="margin-top: 40px; margin-left: 10px; color: white">
@@ -65,6 +75,40 @@
                </span>
                <div class="clear"></div>
             </div>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="homepage">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">幻灯片列表</span></a>
+            <a href="javascript:void(0);"><span class="sysz">首页设置</span></a>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="culture">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">发展历程</span></a>
+            <a href="javascript:void(0);"><span class="whln">其他栏目</span></a>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="contact">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="lxfs">联系方式</span></a>
+            <a href="javascript:void(0);"><span class="rlzy">人力资源</span></a>
+         </div>
+      </div>
+   </th:block>
+   <th:block th:fragment="about">
+      <div class="main">
+         <div class="tag-list">
+            <a href="javascript:void(0);"><span class="list">荣誉资质</span></a>
+            <a href="javascript:void(0);"><span class="jcjs">津弛介绍</span></a>
+            <a href="javascript:void(0);"><span class="dszzc">董事长致辞</span></a>
+            <a href="javascript:void(0);"><span class="qyys">企业优势</span></a>
          </div>
       </div>
    </th:block>
@@ -79,13 +123,6 @@
       <div class="main">
          <div class="tag-list">
             <a href="javascript:void(0);"><span class="list">新闻列表</span></a>
-         </div>
-      </div>
-   </th:block>
-   <th:block th:fragment="about">
-      <div class="main">
-         <div class="tag-list">
-            <a href="javascript:void(0);"><span class="list">荣誉资质</span></a>
          </div>
       </div>
    </th:block>

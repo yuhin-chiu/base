@@ -59,4 +59,13 @@ public class NewsPageController extends DialogPageController {
         return dialogItems;
     }
 
+    @Override
+    void initPresentItems() {
+    }
+
+    @Override
+    List<DialogItem> getPresentItems(Integer type) {
+        return null;
+    }
+
 }

@@ -48,4 +48,13 @@ public class DemoPageController extends DialogPageController {
         return dialogItems;
     }
 
+    @Override
+    void initPresentItems() {
+    }
+
+    @Override
+    List<DialogItem> getPresentItems(Integer type) {
+        return null;
+    }
+
 }
