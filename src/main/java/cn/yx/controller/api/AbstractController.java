@@ -87,6 +87,10 @@ public class AbstractController {
         String annex = null;
         ApiResponse temp = null;
 
+        if (file == null) {
+            return null;
+        }
+
         if (file != null && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
             temp = FileUtil.uploadFile(file, clzss.getSimpleName() + "/" + FileUtil.randomName(fileName), clzss);

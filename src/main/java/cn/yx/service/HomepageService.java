@@ -49,7 +49,6 @@ public class HomepageService extends AbstractService {
                         .collect(Collectors.toList()));
                 e.setImgUrl(parseUri2Url(e.getImgKey()));
                 e.setImgKey(null);
-                e.setMediaKey(null);
             });
         if(list.size() > 0) {
             return list.get(0);

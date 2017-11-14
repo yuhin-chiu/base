@@ -9,7 +9,7 @@ $(function () {
     var basePresent = function(url) {
         $this = $(this);
         baseUri = url;
-        
+
         init();
     }
     
@@ -48,6 +48,7 @@ $(function () {
         clearField: function () {
             var val = $('#present-author').val();
             $('#present-table input[type="text"]').val('');
+            $('#present-table input[type="file"]').val('');
             $('#present-author').val(val);
             $('#present-table textarea').val('');
             if(window.editor) {
@@ -84,8 +85,6 @@ $(function () {
                     window.editor.html(data[item.attr('key')]);
                 }
             }
-            
-            $('.present').present('show');
         }
     };
 
@@ -152,5 +151,7 @@ $(function () {
         event_bind();
     }
     
+    basePresent.setCondition = events.setCondition;
+    basePresent.clearField = events.clearField;
     $.fn.basePresent = basePresent;
 });

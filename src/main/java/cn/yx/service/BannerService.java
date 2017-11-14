@@ -51,6 +51,8 @@ public class BannerService extends AbstractService {
         list.forEach(e -> {
             e.setImgUrl(parseUri2Url(e.getImgKey()));
             e.setImgKey(null);
+            e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
+            e.setCreateTime(null);
         });
         return list;
     }

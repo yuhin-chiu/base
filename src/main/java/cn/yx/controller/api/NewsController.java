@@ -59,14 +59,16 @@ public class NewsController extends AbstractController {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
         if (news.getId() == null) {
-            if (temp.isSuccess()) {
+            if (temp == null) {
+                return ApiResponse.fileSaveEmpty();
+            } else if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 news.setImgKey(imgKey);
             } else {
                 return temp;
             }
         } else if (news.getId() != null) {
-            if (temp.isSuccess()) {
+            if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 news.setImgKey(imgKey);
             }

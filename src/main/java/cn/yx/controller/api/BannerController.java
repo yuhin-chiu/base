@@ -57,14 +57,16 @@ public class BannerController extends AbstractController {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
         if (banner.getId() == null) {
-            if (temp.isSuccess()) {
+            if (temp == null) {
+                return ApiResponse.fileSaveEmpty();
+            } else if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 banner.setImgKey(imgKey);
             } else {
                 return temp;
             }
         } else if (banner.getId() != null) {
-            if (temp.isSuccess()) {
+            if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 banner.setImgKey(imgKey);
             }

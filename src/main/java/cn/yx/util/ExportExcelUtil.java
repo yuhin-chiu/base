@@ -127,7 +127,7 @@ public class ExportExcelUtil<T> {
     public String getFileName() {
         // 默认文件名是时间
         if (fileName == null || fileName.equals("")) {
-            fileName = new Date().getTime() + ".xls";
+            fileName = System.currentTimeMillis() + ".xls";
         }
         return fileName;
     }

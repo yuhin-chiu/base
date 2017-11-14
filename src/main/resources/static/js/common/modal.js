@@ -92,7 +92,7 @@ $(function () {
             var childs = $('#modal-table').children().children().children("td").children();
             for(var i = 0; i < childs.length; i++) {
                 var item = $(childs[i]);
-                if(item.attr('type') == 'text' || item.attr('type') == 'textarea') {
+                if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'hidden') {
                     item.val(data[item.attr('key')]);
                 } else if(item.attr('type') == 'editor') {
                     window.editor.html(data[item.attr('key')]);

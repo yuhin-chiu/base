@@ -19,6 +19,7 @@ build/
 *.war
 /classes/
 /LOG_DIR_IS_UNDEFINED/
+/files/
 /WebContent/
 .factorypath
 .springBeans

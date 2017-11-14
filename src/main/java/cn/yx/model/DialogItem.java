@@ -21,7 +21,7 @@ public class DialogItem {
     private List<SelectItem> selectItems;
 
     private Integer minLength = 1;
-    private Integer maxLength = 30;
+    private Integer maxLength = 50;
 
     /**
      * 设置id,title,默认设置type,placeholder
@@ -32,14 +32,14 @@ public class DialogItem {
         super();
         this.id = id;
         this.title = title;
-        this.placeholder = "不能为空且最大长度不超过30";
+        this.placeholder = "不能为空且最大长度不超过50";
     }
     public DialogItem(String id, String title, String type) {
         super();
         this.id = id;
         this.title = title;
         this.type = type;
-        this.placeholder = "不能为空且最大长度不超过30";
+        this.placeholder = "不能为空且最大长度不超过50";
     }
 
     public DialogItem() {

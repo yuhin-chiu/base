@@ -56,6 +56,7 @@ public class JcBanner {
      * @mbg.generated Mon Nov 06 14:42:09 CST 2017
      */
     private Date createTime;
+    private String createTimeStr;
 
     /**
      *
@@ -240,5 +241,13 @@ public class JcBanner {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

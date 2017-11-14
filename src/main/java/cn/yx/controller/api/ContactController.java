@@ -58,14 +58,16 @@ public class ContactController extends AbstractController {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
         if (contact.getId() == null) {
-            if (temp.isSuccess()) {
+            if (temp == null) {
+                return ApiResponse.fileSaveEmpty();
+            } else if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 contact.setImgKey(imgKey);
             } else {
                 return temp;
             }
         } else if (contact.getId() != null) {
-            if (temp.isSuccess()) {
+            if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 contact.setImgKey(imgKey);
             }

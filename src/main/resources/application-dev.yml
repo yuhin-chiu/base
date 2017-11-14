@@ -11,4 +11,4 @@ datasource:
   time-between-eviction-runs-millis: 300000
 
 file:
-  url: http://localhost
+  url: http://localhost:8888

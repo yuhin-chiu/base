@@ -58,14 +58,16 @@ public class AboutController extends AbstractController {
         ApiResponse temp = this.uploadFile(request, this.getClass(), "image");
 
         if (about.getId() == null) {
-            if (temp.isSuccess()) {
+            if (temp == null) {
+                return ApiResponse.fileSaveEmpty();
+            } else if (temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 about.setImgKey(imgKey);
             } else {
                 return temp;
             }
         } else if (about.getId() != null) {
-            if (temp.isSuccess()) {
+            if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 about.setImgKey(imgKey);
             }

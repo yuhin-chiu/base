@@ -18,7 +18,7 @@ public class AbstractService {
     @Autowired
     private FileConfig fileConfig;
 
-    protected String parseUri2Url(String input) {
+    public String parseUri2Url(String input) {
         if (StringUtils.isBlank(input)) {
             return "";
         }
