@@ -55,7 +55,6 @@ public class AboutService extends AbstractService {
             e.setCreateTimeStr(TimeUtil.formatDataToTime(e.getCreateTime()));
             e.setImgUrls(ListUtil.split(e.getImgKey()).stream().map(this::parseUri2Url).collect(Collectors.toList()));
             e.setCreateTime(null);
-            e.setImgKey(null);
         });
         return list;
     }

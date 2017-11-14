@@ -14,8 +14,10 @@ import com.github.pagehelper.Page;
 
 import cn.yx.annotation.AdminOperation;
 import cn.yx.entity.JcAbout;
+import cn.yx.entity.JcHomepage;
 import cn.yx.model.ApiResponse;
 import cn.yx.model.ResponseList;
+import cn.yx.util.ListUtil;
 
 /**
  * @author yuxuanjiao
@@ -70,6 +72,28 @@ public class AboutController extends AbstractController {
             if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 about.setImgKey(imgKey);
+            } else if (temp != null) {
+                return temp;
+            }
+            if(about.getParent() != null && about.getParent().equals(0)) {
+                ApiResponse temp1 = this.uploadFile(request, this.getClass(), "image1");
+                ApiResponse temp2 = this.uploadFile(request, this.getClass(), "image2");
+                JcAbout e = aboutService.list(0, null, about.getLang(), 1, 1).get(0);
+                List<String> list = ListUtil.split(e.getImgKey());
+                if (about.getImgKey() != null) {
+                    list.set(0, about.getImgKey());
+                }
+                if (temp1 != null && temp1.isSuccess()) {
+                    list.set(1, (String) temp1.getData());
+                } else if(temp1 != null) {
+                    return temp1;
+                }
+                if (temp2 != null && temp2.isSuccess()) {
+                    list.set(2, (String) temp2.getData());
+                } else if(temp2 != null) {
+                    return temp2;
+                }
+                about.setImgKey(ListUtil.connect(list));
             }
         }
         if (aboutService.insertOrUpdate(about)) {

@@ -21,10 +21,10 @@ import cn.yx.model.DialogItem;
 public class DemoPageController extends DialogPageController {
     
     
-    @RequestMapping({ "/", "", "list" })
+    @RequestMapping({ "/", "", "list", "help" })
     public String index(Model model) {
         setDailogItems(model);
-        return "/demo/list";
+        return "/demo/help";
     }
 
 

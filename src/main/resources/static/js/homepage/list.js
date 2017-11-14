@@ -22,7 +22,7 @@ $(function() {
         align : "center",
         width : 100
     }, {
-        title : "跳转地址",
+        title : "跳转链接",
         field : "url",
         align : "center",
         formatter : function(value) {

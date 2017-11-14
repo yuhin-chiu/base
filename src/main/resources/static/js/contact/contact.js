@@ -6,13 +6,9 @@ $(function() {
         inner_page_jump : function() {
             var cur = $(this);
             if (cur.hasClass("list")) {
-                location.href = "/backend/about/list";
+                location.href = "/backend/contact/list";
             } else if (cur.hasClass("other")) {
-                location.href = "/backend/about/other";
-            } else if (cur.hasClass("jcgk")) {
-                location.href = "/backend/about/jcgk";
-            } else if (cur.hasClass("qyys")) {
-                location.href = "/backend/about/qyys";
+                location.href = "/backend/contact/other";
             }
         },
         select_menu : function() {

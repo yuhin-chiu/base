@@ -55,12 +55,12 @@ public class HomepageController extends AbstractController {
                 } else if(temp1 != null) {
                     return temp1;
                 }
-                if (temp2 != null && temp1.isSuccess()) {
+                if (temp2 != null && temp2.isSuccess()) {
                     list.set(1, (String) temp2.getData());
                 } else if(temp2 != null) {
                     return temp2;
                 }
-                if (temp3 != null && temp1.isSuccess()) {
+                if (temp3 != null && temp3.isSuccess()) {
                     list.set(2, (String) temp3.getData());
                 } else if(temp3 !=null) {
                     return temp3;
