@@ -67,7 +67,12 @@ public class FileUtil {
 
     public static void downloadFile(String fileName, BufferedOutputStream out, Class clzss) throws IOException {
 
+        if (fileName.indexOf("..") != -1) {
+            return;
+        }
         File file = new File(FileConstant.UPLOAD_FOLDER, fileName);
+        System.out.println(file.getName());
+        System.out.println(file.getPath());
         if (file.exists()) {
             BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
 

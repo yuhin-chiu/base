@@ -30,11 +30,15 @@ $(function () {
             } else if(type == "其他"){
                 location.href = "/backend/demo";
             }
+        },
+        goto_home: function() {
+            window.open("http://www.jinchichina.com/", "_blank"); 
         }
     };
 
     function bind_event() {
         $(".header-content .header-main div span").click(events.jump);
+        $(".logo").click(events.goto_home);
     }
 
     function init() {
