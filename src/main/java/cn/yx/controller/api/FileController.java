@@ -38,10 +38,10 @@ public class FileController extends AbstractController {
     public void imageFile(@RequestParam(defaultValue = "test.txt") String fileName, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         if (fileName != null) {
-            if (verifyString(fileName)) {
-                LOGGER.error("Yuhin！有人尝试输入非法文件名,IP为：" + getIpReal(request) + "；uri为：" + request.getRequestURL()
-                        + "?" + request.getQueryString());
-                response.sendRedirect("https://www.baidu.com/s?wd=%E6%B1%82%E6%94%BE%E8%BF%87");
+            if (!FileUtil.verifyString(fileName)) {
+                LOGGER.error("Yuhin！有人尝试输入非法文件名,IP为：" + getIpReal(request) + "；uri为：" + request.getRequestURL() + "?"
+                        + request.getQueryString());
+                response.sendRedirect("http://map.baidu.com");
                 return;
             }
             // 当前是从该工程目录的File文件夹中获取文件(该目录在常量中配置了)
@@ -126,24 +126,5 @@ public class FileController extends AbstractController {
             ip = request.getRemoteAddr();
         }
         return ip.equals("0:0:0:0:0:0:0:1") ? "localhost" : ip;
-    }
-
-    /**
-     * 需要拒绝访问的就返回true
-     * @param input
-     * @return
-     */
-    private Boolean verifyString(String input) {
-        System.out.println(input);
-        String[] fbsArr = { "\\", "$", "(", ")", "*", "+", "[", "]", "?", "^", "{", "}", "|", "%", "~"};
-        for (String key : fbsArr) {
-            if (input.contains(key)) {
-                return true;
-            }
-        }
-        if (input.indexOf("..") != -1) {
-            return true;
-        }
-        return false;
     }
 }
