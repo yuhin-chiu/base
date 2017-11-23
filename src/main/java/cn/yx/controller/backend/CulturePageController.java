@@ -44,9 +44,11 @@ public class CulturePageController extends DialogPageController {
             DialogItem title = new DialogItem("title", "标题");
             DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
             content.setLength(1, 500);
+            DialogItem parent = new DialogItem("parent", "0", DialogItemEnum.HIDDEN.getStr());
 
             dialogItems.add(title);
             dialogItems.add(content);
+            dialogItems.add(parent);
         }
     }
 

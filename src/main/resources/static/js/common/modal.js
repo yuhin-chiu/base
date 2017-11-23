@@ -61,7 +61,8 @@ $(function () {
         },
         clearField: function () {
             var val = $('#modal-author').val();
-            $('.modal input').val('');
+            $('.modal input[type="text"]').val('');
+            $('.modal input[type="file"]').val('');
             $('#modal-author').val(val);
             $('.modal textarea').val('');
             if(window.editor) {
@@ -76,7 +77,7 @@ $(function () {
             var childs = $('#modal-table').children().children().children("td").children();
             for(var i = 0; i < childs.length; i++) {
                 var item = $(childs[i]);
-                if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'select') {
+                if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'select' || item.attr('type') == 'hidden' ) {
                     formData.append(item.attr('key'), item.val());
                 } else if(item.attr('type') == 'editor') {
                     formData.append(item.attr('key'), window.editor.html());

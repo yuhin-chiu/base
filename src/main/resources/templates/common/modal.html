@@ -11,9 +11,10 @@
                    <input type="text" id="modal-id" class="hidden"/>
                    <input type="hidden" id="modal-author" th:value="${admin.userName}" />
                    <table width="100%" class="table" id="modal-table">
-                       <tr th:each="item:${dialogItems}" style="height: 50px">
+                       <tr th:each="item:${dialogItems}" style="height: 50px" th:class="${item.type == 'hidden'}?'hidden':''">
                            <th style="width: 120px; text-align: right"><span style="color: red">*</span><span th:text="${item.title}"></span>:</th>
                            <td style="text-align: left">
+                               <input th:if="${item.type} == 'hidden'" type="hidden" th:value="${item.title}" th:attr="key=${item.id}"/>
                                <input th:if="${item.type} == 'text'" 
                                       th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, placeholder=${item.placeholder}, title=${item.title}" 
                                       type="text" style="width: 50%;" />
