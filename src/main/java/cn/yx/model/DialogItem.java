@@ -40,6 +40,10 @@ public class DialogItem {
         this.title = title;
         this.type = type;
         this.placeholder = "不能为空且最大长度不超过50";
+        if (type.equals(DialogItemEnum.TEXTAREA.getStr())) {
+            this.maxLength = 1000;
+            this.placeholder = "不能为空且最大长度不超过1000";
+        }
     }
 
     public DialogItem() {

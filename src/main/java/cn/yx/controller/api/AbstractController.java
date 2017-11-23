@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import cn.yx.enums.ApiResponseEnum;
 import cn.yx.model.ApiResponse;
@@ -83,10 +84,16 @@ public class AbstractController {
     }
 
     protected ApiResponse uploadFile(HttpServletRequest request, Class<?> clzss, String key) {
-        MultipartFile file = ((MultipartHttpServletRequest) request).getFile(key);
+        MultipartFile file = null;
         String annex = null;
         ApiResponse temp = null;
 
+        try {
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            file = multiRequest.getFile(key);
+        }  catch (Exception e) {
+            return null;
+        }
         if (file == null) {
             return null;
         }
