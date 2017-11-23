@@ -88,7 +88,7 @@ public class FileController extends AbstractController {
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
         MultipartFile file = null;
         String[] fileNames = new String[files.size()];
-        ApiResponse temp, resp = new ApiResponse();
+        ApiResponse temp;
 
         for (int i = 0; i < files.size(); ++i) {
             file = files.get(i);
@@ -99,13 +99,11 @@ public class FileController extends AbstractController {
                 }
                 fileNames[i] = (String) temp.getData();
             } else {
-                resp.setDescription("某些上传文件为空，请检查！");
+                ApiResponse.fileSaveEmpty().setDescription("某些上传文件为空，请检查！");
             }
         }
 
-        resp.setMsg("上传文件成功");
-        resp.setData(fileNames);
-        return resp;
+        return ApiResponse.successResponse().setMsg("文件上传成功").setData(fileNames);
     }
 
     private String getIpReal(HttpServletRequest request) {
