@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>管理后台</title>
+<th:block th:include="/common/common :: header"></th:block>
+<script type="text/javascript" src="/js/kindeditor-min.js"></script>
+<script type="text/javascript" src="/js/lang/zh_CN.js"></script>
+<script type="text/javascript" src="/js/contact/contact.js"></script>
+<script type="text/javascript" src="/js/contact/rlzy.js"></script>
+</head>
+<body page="contact">
+   <th:block th:include="/common/common :: toolbar"></th:block>
+   <div id="body-content" menu="rlzy">
+      <th:block th:include="/common/common :: contact"></th:block>
+      <div class="main">
+         <div th:replace="/common/present :: present-dialog(resetable=true)"></div>
+      </div>
+   </div>
+   <div th:include="/common/common :: footer"></div>
+</body>
+</html>

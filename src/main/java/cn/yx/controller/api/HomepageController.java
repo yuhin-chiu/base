@@ -1,7 +1,6 @@
 package cn.yx.controller.api;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.yx.annotation.AdminOperation;
+import cn.yx.entity.JcAbout;
 import cn.yx.entity.JcHomepage;
 import cn.yx.model.ApiResponse;
 import cn.yx.util.ListUtil;
@@ -28,7 +28,19 @@ public class HomepageController extends AbstractController {
 
     @RequestMapping("/all")
     public ApiResponse all(@RequestParam(value = "lang", required = false) Integer lang) {
-        return ApiResponse.successResponse().setData(homepageService.getLastOne(lang));
+        List<JcAbout> list = aboutService.list(0, null, null, lang, 1, 1);
+        JcHomepage homepage = homepageService.getLastOne(lang);
+        if (list.size() > 0) {
+            JcAbout about = list.get(0);
+            homepage.setIntroduction(about.getContent());
+            homepage.setImgUrl(about.getImgUrl());
+        }
+        return ApiResponse.successResponse().setData(homepage);
+    }
+
+    @RequestMapping("/footer")
+    public ApiResponse footer(@RequestParam(value = "lang", defaultValue = "0") Integer lang) {
+        return ApiResponse.successResponse().setData(homepageService.getFooter(lang));
     }
 
     @AdminOperation
@@ -44,7 +56,7 @@ public class HomepageController extends AbstractController {
             if (temp != null && temp.isSuccess()) {
                 String imgKey = (String) temp.getData();
                 homepage.setImgKey(imgKey);
-            } else if(temp != null) {
+            } else if (temp != null) {
                 return temp;
             }
             if (temp1 != null || temp2 != null || temp3 != null) {
@@ -52,17 +64,17 @@ public class HomepageController extends AbstractController {
                 List<String> list = ListUtil.split(e.getMediaKey());
                 if (temp1 != null && temp1.isSuccess()) {
                     list.set(0, (String) temp1.getData());
-                } else if(temp1 != null) {
+                } else if (temp1 != null) {
                     return temp1;
                 }
                 if (temp2 != null && temp2.isSuccess()) {
                     list.set(1, (String) temp2.getData());
-                } else if(temp2 != null) {
+                } else if (temp2 != null) {
                     return temp2;
                 }
                 if (temp3 != null && temp3.isSuccess()) {
                     list.set(2, (String) temp3.getData());
-                } else if(temp3 !=null) {
+                } else if (temp3 != null) {
                     return temp3;
                 }
                 homepage.setMediaKey(ListUtil.connect(list));

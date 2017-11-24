@@ -70,9 +70,6 @@ public class HomePageController extends DialogPageController {
             DialogItem mail = new DialogItem("mail", "邮箱");
             DialogItem videoUrl = new DialogItem("videoUrl", "宣传片地址");
             videoUrl.setLength(1, 300);
-            DialogItem introduction = new DialogItem("introduction", "关于津弛", DialogItemEnum.TEXTAREA.getStr());
-            introduction.setLength(1, 500);
-            DialogItem image = new DialogItem("image", "关于图片", DialogItemEnum.IMAGE.getStr());
             DialogItem image1 = new DialogItem("image1", "媒体图片1", DialogItemEnum.IMAGE.getStr());
             DialogItem image2 = new DialogItem("image2", "媒体图片2", DialogItemEnum.IMAGE.getStr());
             DialogItem image3 = new DialogItem("image3", "媒体图片3", DialogItemEnum.IMAGE.getStr());
@@ -81,8 +78,6 @@ public class HomePageController extends DialogPageController {
             whlnItems.add(phone);
             whlnItems.add(mail);
             whlnItems.add(videoUrl);
-            whlnItems.add(introduction);
-            whlnItems.add(image);
             whlnItems.add(image1);
             whlnItems.add(image2);
             whlnItems.add(image3);

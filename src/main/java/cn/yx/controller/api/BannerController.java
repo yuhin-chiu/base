@@ -31,6 +31,7 @@ public class BannerController extends AbstractController {
     @ResponseBody
     public ResponseList bannerList(@RequestParam(value = "lang", required = false) Integer lang,
             @RequestParam(value = "timeRange", required = false) String timeRange,
+            @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {
         if (pageSize == null || pageSize > 100 || pageSize < 0) {
@@ -39,7 +40,7 @@ public class BannerController extends AbstractController {
         if (page == null || page < 1) {
             page = 1;
         }
-        List<JcBanner> list = bannerService.list(timeRange, lang, page, pageSize);
+        List<JcBanner> list = bannerService.list(timeRange, title, lang, page, pageSize);
         Long total = ((Page<JcBanner>) list).getTotal();
         return ResponseList.rows(list).total(total);
     }

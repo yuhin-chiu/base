@@ -30,7 +30,7 @@ public class AboutService extends AbstractService {
     @Resource
     private JcAboutMapper aboutMapper;
 
-    public List<JcAbout> list(Integer parent, String timeRange, Integer lang, int page, int pageSize) {
+    public List<JcAbout> list(Integer parent, String timeRange, String title, Integer lang, int page, int pageSize) {
         JcAboutExample example = new JcAboutExample();
         example.setOrderByClause("create_time desc");
 
@@ -38,6 +38,9 @@ public class AboutService extends AbstractService {
         if (!StringUtils.isBlank(timeRange)) {
             Date[] dates = TimeUtil.splitDayRangeToDateBig(timeRange);
             criteria.andCreateTimeBetween(dates[0], dates[1]);
+        }
+        if (!StringUtils.isBlank(title)) {
+            criteria.andContentLike("%" + title + "%");
         }
         if (lang == null) {
             lang = 0;

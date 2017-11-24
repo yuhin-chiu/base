@@ -38,7 +38,6 @@ public class NewsPageController extends DialogPageController {
         if(dialogItems.size() == 0) {
             DialogItem title = new DialogItem("title", "标题");
             DialogItem abstr = new DialogItem("abstr", "摘要", DialogItemEnum.TEXTAREA.getStr());
-            abstr.setLength(1, 200);
             DialogItem parent = new DialogItem("parent", "所属栏目", DialogItemEnum.SELECT.getStr());
             parent.addSelectItem(0, "公司动态");
             parent.addSelectItem(1, "行业新闻");

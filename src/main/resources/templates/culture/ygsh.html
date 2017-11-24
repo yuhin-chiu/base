@@ -5,15 +5,15 @@
 <th:block th:include="/common/common :: header"></th:block>
 <script type="text/javascript" src="/js/kindeditor-min.js"></script>
 <script type="text/javascript" src="/js/lang/zh_CN.js"></script>
-<script type="text/javascript" src="/js/contact/contact.js"></script>
-<script type="text/javascript" src="/js/contact/other.js"></script>
+<script type="text/javascript" src="/js/culture/culture.js"></script>
+<script type="text/javascript" src="/js/culture/ygsh.js"></script>
 </head>
-<body page="contact">
+<body page="culture">
    <th:block th:include="/common/common :: toolbar"></th:block>
-   <div id="body-content" menu="other">
-      <th:block th:include="/common/common :: contact"></th:block>
+   <div id="body-content" menu="ygsh">
+      <th:block th:include="/common/common :: culture"></th:block>
       <div class="main">
-         <div th:replace="/common/present :: present-dialog(resetable=true)"></div>
+         <div th:replace="/common/present :: present-dialog"></div>
       </div>
    </div>
    <div th:include="/common/common :: footer"></div>

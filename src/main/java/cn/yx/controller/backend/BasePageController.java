@@ -31,7 +31,7 @@ public class BasePageController {
 
     @RequestMapping({ "/", "", "index" })
     public String index() {
-        return "redirect:/backend/culture";
+        return "redirect:/backend/news";
     }
 
     @RequestMapping("/loginAction")

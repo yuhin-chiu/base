@@ -32,6 +32,7 @@ public class CultureController extends AbstractController {
     public ResponseList cultureList(@RequestParam(value = "parent", defaultValue = "0") Integer parent,
             @RequestParam(value = "lang", required = false) Integer lang,
             @RequestParam(value = "timeRange", required = false) String timeRange,
+            @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {
         if (pageSize == null || pageSize > 100 || pageSize < 0) {
@@ -40,7 +41,7 @@ public class CultureController extends AbstractController {
         if (page == null || page < 1) {
             page = 1;
         }
-        List<JcCulture> list = cultureService.list(parent, timeRange, lang, page, pageSize);
+        List<JcCulture> list = cultureService.list(parent, timeRange, title, lang, page, pageSize);
         Long total = ((Page<JcCulture>) list).getTotal();
         return ResponseList.rows(list).total(total);
     }

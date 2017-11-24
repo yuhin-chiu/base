@@ -23,6 +23,7 @@
                                     style="width: 100%; height: 76px;resize:none;"></textarea>
                                <input th:if="${item.type} == 'image'" type="file" multiple="multiple" 
                                     th:attr="key=${item.id}, name=${item.id}, title=${item.title}, type='file'"/>
+                               <span th:if="${item.type} == 'image'" th:text="${item.placeholder}" style="line-height:30px;"></span>
                                <textarea th:if="${item.type} == 'editor'" name="editor"
                                     th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, type=${item.type}, title=${item.title}"
                                     style="width: 100%; height: 350px; visibility: hidden; display: block;"></textarea>

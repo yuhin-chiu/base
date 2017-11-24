@@ -34,6 +34,7 @@ public class AboutController extends AbstractController {
     public ResponseList aboutList(@RequestParam(value = "parent", required = false, defaultValue = "2") Integer parent,
             @RequestParam(value = "lang", required = false, defaultValue = "0") Integer lang,
             @RequestParam(value = "timeRange", required = false) String timeRange,
+            @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {
         if (pageSize == null || pageSize > 100 || pageSize < 0) {
@@ -42,7 +43,7 @@ public class AboutController extends AbstractController {
         if (page == null || page < 1) {
             page = 1;
         }
-        List<JcAbout> list = aboutService.list(parent, timeRange, lang, page, pageSize);
+        List<JcAbout> list = aboutService.list(parent, timeRange, title, lang, page, pageSize);
         Long total = ((Page<JcAbout>) list).getTotal();
         return ResponseList.rows(list).total(total);
     }
@@ -78,7 +79,7 @@ public class AboutController extends AbstractController {
             if(about.getParent() != null && about.getParent().equals(0)) {
                 ApiResponse temp1 = this.uploadFile(request, this.getClass(), "image1");
                 ApiResponse temp2 = this.uploadFile(request, this.getClass(), "image2");
-                JcAbout e = aboutService.list(0, null, about.getLang(), 1, 1).get(0);
+                JcAbout e = aboutService.list(0, null, null, about.getLang(), 1, 1).get(0);
                 List<String> list = ListUtil.split(e.getImgKey());
                 if (about.getImgKey() != null) {
                     list.set(0, about.getImgKey());

@@ -7,8 +7,10 @@ $(function() {
             var cur = $(this);
             if (cur.hasClass("list")) {
                 location.href = "/backend/contact/list";
-            } else if (cur.hasClass("other")) {
-                location.href = "/backend/contact/other";
+            } else if (cur.hasClass("lxfs")) {
+                location.href = "/backend/contact/lxfs";
+            } else if (cur.hasClass("rlzy")) {
+                location.href = "/backend/contact/rlzy";
             }
         },
         select_menu : function() {

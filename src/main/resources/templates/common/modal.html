@@ -26,6 +26,7 @@
                                     style="width: 100%; height: 76px;resize:none;"></textarea>
                                <input th:if="${item.type} == 'image'" type="file" multiple="multiple" 
                                     th:attr="key=${item.id}, name=${item.id}, title=${item.title}, type='file'"/>
+                               <span th:if="${item.type} == 'image'" th:text="${item.placeholder}" style="line-height:30px;"></span>
                                <textarea th:if="${item.type} == 'editor'" name="editor"
                                     th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, type=${item.type}, title=${item.title}"
                                     style="width: 100%; height: 350px; visibility: hidden; display: block;"></textarea>
@@ -69,10 +70,11 @@
 </div>
 <div th:fragment="modal-menu" class="modal-menu">
          <label>日期：</label><input id="modal-timeRange" type="text" value="" class="date-picker" readonly="readonly" />
-         <label>标题：</label><input type="text" id="modal-title" style="width: 300px" placeholder="标题关键字" />
+         <label>关键字：</label><input type="text" id="modal-title" style="width: 300px" placeholder="输入关键字点击查询" />
          <input type="button" value="查询" id="modal-queryBtn" class="btn btn-default"/>
-         <input th:if="${addable} == true" type="button" value="添加" id="modal-addBtn" class="btn btn-default" data-toggle="modal" data-target="#modal-dialog"/>
-         <div style="width: 100%; height: 25px; text-align: right">
+         <input th:if="${addable} == true" type="button" value="添加" id="modal-addBtn" class="btn btn-default" 
+              style="background-color:#5cb85c;border-color:#4cae4c;color:#fff;" data-toggle="modal" data-target="#modal-dialog"/>
+         <div style="width: 100%; height: 25px; text-align: right;">
          </div>
          <table id="autotable"> <!-- 显示列表 -->
          </table>

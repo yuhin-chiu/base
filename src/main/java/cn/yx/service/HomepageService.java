@@ -99,4 +99,8 @@ public class HomepageService extends AbstractService {
         news.setId(id + 1);
         return homepageMapper.updateByPrimaryKeySelective(news) > 0 ? true : false;
     }
+
+    public JcHomepage getFooter(Integer lang) {
+        return homepageMapper.getFooter(lang);
+    }
 }

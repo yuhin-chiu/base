@@ -28,7 +28,7 @@ public class BannerService extends AbstractService {
     @Resource
     private JcBannerMapper bannerMapper;
 
-    public List<JcBanner> list(String timeRange, Integer lang, int page, int pageSize) {
+    public List<JcBanner> list(String timeRange, String title, Integer lang, int page, int pageSize) {
         JcBannerExample example = new JcBannerExample();
         example.setOrderByClause("create_time desc");
 
@@ -36,6 +36,9 @@ public class BannerService extends AbstractService {
         if (!StringUtils.isBlank(timeRange)) {
             Date[] dates = TimeUtil.splitDayRangeToDateBig(timeRange);
             criteria.andCreateTimeBetween(dates[0], dates[1]);
+        }
+        if (!StringUtils.isBlank(title)) {
+            criteria.andTitleLike("%" + title + "%");
         }
         if (lang == null) {
             lang = 0;

@@ -6,7 +6,7 @@ $(function() {
 
     function langChange() {
         $("#present-table").basePresent.clearField();
-        $.get("/api/" + baseUri + "/list", {parent : $('.present-select').eq(0).val(), lang : $('.present-select').eq(1).val()}, function(data) {
+        $.get("/api/" + baseUri + "/list", {parent : 3, lang : $('.present-select').eq(0).val()}, function(data) {
             $("#present-id").val(data.rows[0].id);
             $("#present-table").basePresent.setCondition(data.rows[0]);
         });
