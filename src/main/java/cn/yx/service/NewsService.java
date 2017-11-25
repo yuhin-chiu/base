@@ -45,7 +45,9 @@ public class NewsService extends AbstractService {
         }
         criteria.andLangEqualTo(lang);
         criteria.andStatusNotEqualTo(-1);
-        criteria.andParentEqualTo(parent);
+        if (parent != -1) {
+            criteria.andParentEqualTo(parent);
+        }
 
         // query
         PageHelper.startPage(page, pageSize);

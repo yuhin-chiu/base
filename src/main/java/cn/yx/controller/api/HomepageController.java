@@ -33,7 +33,7 @@ public class HomepageController extends AbstractController {
         if (list.size() > 0) {
             JcAbout about = list.get(0);
             homepage.setIntroduction(about.getContent());
-            homepage.setImgUrl(about.getImgUrl());
+            homepage.setImgUrl(about.getImgUrls().get(0));
         }
         return ApiResponse.successResponse().setData(homepage);
     }

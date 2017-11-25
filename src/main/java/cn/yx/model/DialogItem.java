@@ -45,6 +45,9 @@ public class DialogItem {
             this.placeholder = "不能为空且最大长度不超过1000";
         } else if (type.equals(DialogItemEnum.IMAGE.getStr())) {
             this.placeholder = "";
+        } else if (type.equals(DialogItemEnum.EDITOR.getStr())) {
+            this.placeholder = "";
+            this.maxLength = 15000;
         }
     }
 

@@ -31,7 +31,7 @@ public class NewsController extends AbstractController {
     @ResponseBody
     public ResponseList newsList(@RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "lang", required = false) Integer lang,
-            @RequestParam(value = "parent", defaultValue = "0") Integer parent,
+            @RequestParam(value = "parent", defaultValue = "-1") Integer parent,
             @RequestParam(value = "timeRange", required = false) String timeRange,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer page) {

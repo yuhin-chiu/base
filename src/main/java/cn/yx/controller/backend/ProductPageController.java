@@ -38,7 +38,6 @@ public class ProductPageController extends DialogPageController {
         if(dialogItems.size() == 0) {
             DialogItem title = new DialogItem("title", "标题");
             DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
-            content.setLength(1, 10000);
 
             dialogItems.add(title);
             dialogItems.add(content);

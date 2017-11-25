@@ -42,8 +42,8 @@ public class NewsPageController extends DialogPageController {
             parent.addSelectItem(0, "公司动态");
             parent.addSelectItem(1, "行业新闻");
             DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
-            content.setLength(1, 500);
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
+            image.setPlaceholder("推荐尺寸380*285");
 
             dialogItems.add(title);
             dialogItems.add(parent);

@@ -28,7 +28,7 @@ public class AboutPageController extends DialogPageController {
 
     @RequestMapping({ "jcgk" })
     public String jcgk(Model model) {
-        setPresentItems(model, 1);
+        setPresentItems(model, 2);
         return "/about/jcgk";
     }
 
@@ -53,7 +53,7 @@ public class AboutPageController extends DialogPageController {
     protected synchronized void initDialogItems() {
         if (dialogItems.size() == 0) {
             DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
-            content.setLength(1, 500);
+            content.setLength(1, 5000);
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
 
             dialogItems.add(content);
