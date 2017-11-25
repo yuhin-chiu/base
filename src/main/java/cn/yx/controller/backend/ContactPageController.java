@@ -55,7 +55,8 @@ public class ContactPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("建议宽度880px");
@@ -70,7 +71,8 @@ public class ContactPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("建议宽度1200px");

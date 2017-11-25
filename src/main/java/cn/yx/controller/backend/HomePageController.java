@@ -44,6 +44,7 @@ public class HomePageController extends DialogPageController {
             DialogItem url = new DialogItem("url", "跳转地址");
             url.setLength(1, 200);
             DialogItem content = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
+            content.setPlaceholder("图片尺寸应为1920*400");
             
             dialogItems.add(title);
             dialogItems.add(url);
@@ -69,10 +70,14 @@ public class HomePageController extends DialogPageController {
             DialogItem phone = new DialogItem("phone", "电话");
             DialogItem mail = new DialogItem("mail", "邮箱");
             DialogItem videoUrl = new DialogItem("videoUrl", "宣传片地址");
+            videoUrl.setComment("输入优酷视频地址栏“id_”到“.html”之间的字符");
             videoUrl.setLength(1, 300);
             DialogItem image1 = new DialogItem("image1", "媒体图片1", DialogItemEnum.IMAGE.getStr());
             DialogItem image2 = new DialogItem("image2", "媒体图片2", DialogItemEnum.IMAGE.getStr());
             DialogItem image3 = new DialogItem("image3", "媒体图片3", DialogItemEnum.IMAGE.getStr());
+            image1.setPlaceholder("图片尺寸应为370*110px");
+            image2.setPlaceholder("图片尺寸应为370*110px");
+            image3.setPlaceholder("图片尺寸应为370*110px");
             whlnItems.add(lang);
             whlnItems.add(address);
             whlnItems.add(phone);

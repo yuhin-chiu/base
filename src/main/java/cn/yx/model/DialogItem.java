@@ -17,6 +17,7 @@ public class DialogItem {
     private String title;
     private String type = DialogItemEnum.TEXT.getStr(); // (text、textarea、editor、radio、checkbox、select)
     private String placeholder;
+    private String comment;
 
     private List<SelectItem> selectItems;
 
@@ -140,5 +141,16 @@ public class DialogItem {
         public void setValue(String value) {
             this.value = value;
         }
+    }
+
+
+    public String getComment() {
+        return comment;
+    }
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+    public void setSelectItems(List<SelectItem> selectItems) {
+        this.selectItems = selectItems;
     }
 }

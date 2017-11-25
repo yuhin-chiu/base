@@ -15,18 +15,22 @@
                            <th style="width: 120px; text-align: right"><span style="color: red">*</span><span th:text="${item.title}"></span>:</th>
                            <td style="text-align: left">
                                <input th:if="${item.type} == 'hidden'" type="hidden" th:value="${item.title}" th:attr="key=${item.id}"/>
-                               <input th:if="${item.type} == 'text'" 
-                                      th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, placeholder=${item.placeholder}, title=${item.title}" 
-                                      type="text" style="width: 50%;" />
+                               <div th:if="${item.type} == 'text'">
+                                 <input th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, placeholder=${item.placeholder}, title=${item.title}"
+                                    type="text" style="width: 50%;" />
+                                  <span th:if="${item.comment} != null and ${item.comment} != ''" th:text="${item.comment}" style="color:red;"></span>
+                               </div>
                                <select th:if="${item.type} == 'select'" th:attr="key=${item.id}, type=${item.type}" class="modal-select">
                                    <option th:each="selectItem: ${item.selectItems}" th:text="${selectItem.value}" th:value="${selectItem.key}"></option>
                                </select>
                                <textarea th:if="${item.type} == 'textarea'" 
                                     th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, placeholder=${item.placeholder}, type=${item.type}, title=${item.title}" 
                                     style="width: 100%; height: 76px;resize:none;"></textarea>
-                               <input th:if="${item.type} == 'image'" type="file" multiple="multiple" 
-                                    th:attr="key=${item.id}, name=${item.id}, title=${item.title}, type='file'"/>
-                               <span th:if="${item.type} == 'image'" th:text="${item.placeholder}" style="line-height:30px;"></span>
+                               <div th:if="${item.type} == 'image'">
+                                    <input type="file" multiple="multiple" 
+                                        th:attr="key=${item.id}, name=${item.id}, title=${item.title}, type='file'" style="display:inline-block;"/>
+                                    <span th:if="${item.placeholder} != null and ${item.placeholder}" th:text="${item.placeholder}" style="color:red;"></span>
+                               </div>
                                <textarea th:if="${item.type} == 'editor'" name="editor"
                                     th:attr="key=${item.id}, minLength=${item.minLength}, maxLength=${item.maxLength}, type=${item.type}, title=${item.title}"
                                     style="width: 100%; height: 350px; visibility: hidden; display: block;"></textarea>

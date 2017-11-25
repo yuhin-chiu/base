@@ -55,6 +55,7 @@ public class AboutPageController extends DialogPageController {
             DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
             content.setLength(1, 5000);
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
+            image.setPlaceholder("推荐尺寸284*364");
 
             dialogItems.add(content);
             dialogItems.add(image);
@@ -77,7 +78,8 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("推荐尺寸(284*364)像素");
@@ -92,7 +94,7 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("推荐尺寸(380*290)像素");
@@ -108,7 +110,8 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "大图", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("推荐尺寸(790*290)像素");
