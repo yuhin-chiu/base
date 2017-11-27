@@ -82,7 +82,16 @@ $(function () {
                 } else if(item.attr('type') == 'editor') {
                     formData.append(item.attr('key'), window.editor.html());
                 } else if(item.attr('type') == 'file' || item.attr('type') == 'image') {
+                    console.log(item.attr('key'));
                     formData.append(item.attr('key'), item[0].files[0]);
+                } else if(item.is('div')) {
+                    var child = item.children();
+                    if(child.attr('type') == 'text' || child.attr('type') == 'textarea' || child.attr('type') == 'select' || child.attr('type') == 'hidden' ) {
+                        formData.append(child.attr('key'), child.val());
+                    } else if(child.attr('type') == 'file' || child.attr('type') == 'image') {
+                        console.log(child.attr('key'));
+                        formData.append(child.attr('key'), child[0].files[0]);
+                    }
                 } else {
                     console.log(item.attr('type'));
                 }
@@ -93,7 +102,12 @@ $(function () {
             var childs = $('#modal-table').children().children().children("td").children();
             for(var i = 0; i < childs.length; i++) {
                 var item = $(childs[i]);
-                if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'hidden') {
+                if(item.is('div')) {
+                    var child = item.children();
+                    if(child.attr('type') == 'text' || child.attr('type') == 'textarea' || child.attr('type') == 'hidden' ) {
+                        child.val(data[child.attr('key')]);
+                    }
+                } else if(item.attr('type') == 'text' || item.attr('type') == 'textarea' || item.attr('type') == 'hidden') {
                     item.val(data[item.attr('key')]);
                 } else if(item.attr('type') == 'editor') {
                     window.editor.html(data[item.attr('key')]);
