@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class TimeUtil {
 
+    public static final Long DAY_LONG_VALUE = 24 * 60 * 60L;
+
     private static final ThreadLocal<SimpleDateFormat> timeFormatter = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
