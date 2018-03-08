@@ -1,14 +1,13 @@
 package cn.yx.controller.backend;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cn.yx.enums.DialogItemEnum;
+import cn.yx.model.DialogItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.yx.enums.DialogItemEnum;
-import cn.yx.model.DialogItem;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author yuxuanjiao
@@ -78,7 +77,7 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
             content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
@@ -94,7 +93,7 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
 
             DialogItem image = new DialogItem("image", "图片", DialogItemEnum.IMAGE.getStr());
             image.setPlaceholder("推荐尺寸(380*290)像素");
@@ -110,7 +109,7 @@ public class AboutPageController extends DialogPageController {
             DialogItem lang = new DialogItem("lang", "语言", DialogItemEnum.SELECT.getStr());
             lang.addSelectItem(0, "中文");
             lang.addSelectItem(1, "英文");
-            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.EDITOR.getStr());
+            DialogItem content = new DialogItem("content", "正文", DialogItemEnum.TEXTAREA.getStr());
             content.setLength(1, 5000);
 
             DialogItem image = new DialogItem("image", "大图", DialogItemEnum.IMAGE.getStr());
